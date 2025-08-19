@@ -1,0 +1,16 @@
+{
+  "name": "get-your-furniture",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev -w @gyf/backend",
+    "dev:frontend": "npm run dev -w @gyf/frontend",
+    "build:backend": "npm run build -w @gyf/backend",
+    "build:frontend": "npm run build -w @gyf/frontend",
+    "start:backend": "npm run start -w @gyf/backend",
+    "start:frontend": "npm run start -w @gyf/frontend"
+  }
+}
