@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.js
 
@@ -10,8 +11,19 @@
 /build
 /dist
 
-# misc
-.DS_Store
+# Nuxt outputs
+**/.nuxt/
+**/.output/
+
+# Prisma local engine cache
+**/.prisma/
+
+# Vercel
+**/.vercel/
+
+# logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -32,7 +44,7 @@ pnpm-debug.log*
 *.swn
 *.bak
 *.tmp
-*.log
 
 # OS-specific
+.DS_Store
 Thumbs.db
