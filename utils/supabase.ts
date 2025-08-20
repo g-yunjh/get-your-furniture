@@ -1,17 +1,20 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '~/types/supabase'
 
-const config = useRuntimeConfig()
-
-export const supabase = createClient<Database>(
-  config.public.supabaseUrl,
-  config.public.supabaseKey
-)
+// Supabase 클라이언트를 생성하는 함수
+export const createSupabaseClient = () => {
+  const config = useRuntimeConfig()
+  return createClient<Database>(
+    config.public.supabaseUrl,
+    config.public.supabaseKey
+  )
+}
 
 // 인증 관련 유틸리티
 export const auth = {
   // 현재 사용자 가져오기
   async getCurrentUser() {
+    const supabase = createSupabaseClient()
     const { data: { user }, error } = await supabase.auth.getUser()
     if (error) throw error
     return user
@@ -19,6 +22,7 @@ export const auth = {
 
   // 로그인
   async signIn(email: string, password: string) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -29,6 +33,7 @@ export const auth = {
 
   // 회원가입
   async signUp(email: string, password: string, name: string) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -42,12 +47,14 @@ export const auth = {
 
   // 로그아웃
   async signOut() {
+    const supabase = createSupabaseClient()
     const { error } = await supabase.auth.signOut()
     if (error) throw error
   },
 
   // 비밀번호 재설정
   async resetPassword(email: string) {
+    const supabase = createSupabaseClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email)
     if (error) throw error
   }
@@ -57,6 +64,7 @@ export const auth = {
 export const furniture = {
   // 모든 가구 가져오기
   async getAll(filters?: any, page = 1, limit = 12) {
+    const supabase = createSupabaseClient()
     let query = supabase
       .from('furniture')
       .select(`
@@ -109,6 +117,7 @@ export const furniture = {
 
   // 단일 가구 가져오기
   async getById(id: string) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase
       .from('furniture')
       .select(`
@@ -125,6 +134,7 @@ export const furniture = {
 
   // 가구 생성
   async create(furnitureData: any) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase
       .from('furniture')
       .insert(furnitureData)
@@ -137,6 +147,7 @@ export const furniture = {
 
   // 가구 업데이트
   async update(id: string, furnitureData: any) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase
       .from('furniture')
       .update(furnitureData)
@@ -150,6 +161,7 @@ export const furniture = {
 
   // 가구 삭제
   async delete(id: string) {
+    const supabase = createSupabaseClient()
     const { error } = await supabase
       .from('furniture')
       .delete()
@@ -163,6 +175,7 @@ export const furniture = {
 export const categories = {
   // 모든 카테고리 가져오기
   async getAll() {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase
       .from('categories')
       .select('*')
@@ -177,6 +190,7 @@ export const categories = {
 export const storage = {
   // 이미지 업로드
   async uploadImage(file: File, path: string) {
+    const supabase = createSupabaseClient()
     const { data, error } = await supabase.storage
       .from('furniture-images')
       .upload(path, file)
@@ -187,6 +201,7 @@ export const storage = {
 
   // 이미지 URL 가져오기
   getImageUrl(path: string) {
+    const supabase = createSupabaseClient()
     const { data } = supabase.storage
       .from('furniture-images')
       .getPublicUrl(path)
@@ -196,6 +211,7 @@ export const storage = {
 
   // 이미지 삭제
   async deleteImage(path: string) {
+    const supabase = createSupabaseClient()
     const { error } = await supabase.storage
       .from('furniture-images')
       .remove([path])
