@@ -1,16 +1,28 @@
 {
-  "name": "get-your-furniture",
-  "version": "0.1.0",
+  "name": "nuxt-app",
+  "type": "module",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
   "scripts": {
-    "dev:backend": "npm run dev -w @gyf/backend",
-    "dev:frontend": "npm run dev -w @gyf/frontend",
-    "build:backend": "npm run build -w @gyf/backend",
-    "build:frontend": "npm run build -w @gyf/frontend",
-    "start:backend": "npm run start -w @gyf/backend",
-    "start:frontend": "npm run start -w @gyf/frontend"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.2.0",
+    "@nuxt/image": "^1.11.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@pinia/nuxt": "^0.11.2",
+    "@supabase/supabase-js": "^2.55.0",
+    "@vueuse/nuxt": "^13.7.0",
+    "nuxt": "^4.0.3",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0"
   }
 }
