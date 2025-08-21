@@ -23,14 +23,17 @@ export default defineNuxtConfig({
   // 앱 설정
   app: {
     head: {
-      title: 'Get Your Furniture - 중고가구 거래 플랫폼',
+      title: '가져가구 - 중고가구 거래 플랫폼',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: '안전하고 편리한 중고가구 거래 플랫폼' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap' }
       ]
     }
   },
@@ -51,12 +54,22 @@ export default defineNuxtConfig({
       ],
       theme: {
         extend: {
+          fontFamily: {
+            'sans': ['Inter', 'Noto Sans KR', 'system-ui', 'sans-serif'],
+            'display': ['Inter', 'Noto Sans KR', 'system-ui', 'sans-serif']
+          },
           colors: {
             primary: {
-              50: '#f0f9ff',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8'
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7c3aed',
+              800: '#6b21a8',
+              900: '#581c87'
             }
           }
         }

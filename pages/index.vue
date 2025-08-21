@@ -1,194 +1,447 @@
 <template>
-  <div>
-    <!-- 히어로 섹션 -->
-    <section class="relative bg-gradient-to-r from-primary-600 to-primary-700 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            중고가구 거래의<br>
-            <span class="text-yellow-300">새로운 경험</span>
-          </h1>
-          <p class="text-xl md:text-2xl mb-8 text-primary-100">
-            안전하고 편리한 중고가구 거래 플랫폼<br>
-            믿을 수 있는 판매자와 구매자를 연결합니다
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <NuxtLink
-              to="/furniture"
-              class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold text-lg transition-colors"
-            >
-              가구 찾기
-            </NuxtLink>
-            <NuxtLink
-              to="/furniture/create"
-              class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-semibold text-lg transition-colors"
-            >
-              판매하기
-            </NuxtLink>
+  <div class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white font-sans">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- 로고 -->
+          <div class="flex items-center space-x-3 group cursor-pointer">
+            <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+              </svg>
+            </div>
+            <span class="text-xl font-black bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              가져가구
+            </span>
+          </div>
+
+          <!-- 데스크톱 메뉴 -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">홈</a>
+            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">카테고리</a>
+            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">인기상품</a>
+            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">내 상품</a>
+          </div>
+
+          <!-- 우측 메뉴 -->
+          <div class="flex items-center space-x-4">
+            <!-- 알림 -->
+            <button class="relative p-2 text-white/80 hover:text-white transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.19 4.19A4 4 0 014 6v6m0 0v6a4 4 0 004 4h6a4 4 0 004-4v-6m-8-4a4 4 0 00-4-4H6a4 4 0 00-4 4v6h8V6z"></path>
+              </svg>
+              <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+            </button>
+
+            <!-- 프로필 -->
+            <button class="w-8 h-8 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-sm">U</span>
+            </button>
+
+            <!-- 모바일 메뉴 버튼 -->
+            <button class="md:hidden p-2 text-white/80 hover:text-white transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
-    </section>
+    </nav>
 
-    <!-- 특징 섹션 -->
-    <section class="py-16 bg-white dark:bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            왜 Get Your Furniture인가요?
-          </h2>
-          <p class="text-lg text-gray-600 dark:text-gray-400">
-            안전하고 신뢰할 수 있는 중고가구 거래를 위한 특별한 서비스
-          </p>
+    <!-- 메인 콘텐츠 -->
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+      <!-- 히어로 섹션 -->
+      <div class="text-center mb-8 sm:mb-12">
+        <div class="mb-4">
+          <span class="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-4 shadow-lg border border-white/30">
+            ✨ 새로운 중고가구 경험
+          </span>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="h-8 w-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              안전한 거래
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              검증된 사용자와 안전한 결제 시스템으로 
-              걱정 없는 거래를 경험하세요
-            </p>
-          </div>
-
-          <div class="text-center">
-            <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="h-8 w-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black mb-4 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent leading-tight">
+          Get your furniture,<br>
+          <span class="text-white drop-shadow-lg">get your future!</span>
+        </h1>
+        <p class="text-2xl sm:text-3xl font-black text-white/90 mb-6">가져가구</p>
+        
+        <!-- 위치 정보 -->
+        <div class="flex items-center justify-center mb-4">
+          <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/30">
+            <div class="flex items-center space-x-4">
+              <svg class="w-6 h-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
               </svg>
+              <span class="text-lg font-bold text-white">어디에서 가구가 필요하신가요?</span>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              지역 기반 매칭
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              가까운 지역의 판매자와 구매자를 연결하여 
-              편리한 거래를 도와드립니다
-            </p>
           </div>
+        </div>
 
-          <div class="text-center">
-            <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="h-8 w-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2"></path>
+        <!-- 연결선 -->
+        <div class="flex justify-center mb-4">
+          <div class="w-px h-3 bg-white/30"></div>
+        </div>
+
+        <!-- 지역 선택 버튼 -->
+        <div class="flex justify-center mb-8">
+          <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-2 shadow-lg border border-white/30">
+            <div class="flex space-x-2">
+              <button 
+                @click="selectLocation('insa')"
+                :class="[
+                  'px-6 py-3 rounded-xl font-bold transition-all duration-300 flex items-center space-x-2',
+                  selectedLocation === 'insa'
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg'
+                    : 'text-white/80 hover:text-white hover:bg-white/20'
+                ]"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                </svg>
+                <span>명륜</span>
+              </button>
+              <button 
+                @click="selectLocation('jagwa')"
+                :class="[
+                  'px-6 py-3 rounded-xl font-bold transition-all duration-300 flex items-center space-x-2',
+                  selectedLocation === 'jagwa'
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg'
+                    : 'text-white/80 hover:text-white hover:bg-white/20'
+                ]"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span>율전</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 검색바 -->
+      <div class="max-w-2xl mx-auto mb-8">
+        <div class="relative group">
+          <div class="bg-white/20 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/30">
+            <div class="flex items-center space-x-4">
+              <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
+              <input 
+                v-model="searchQuery"
+                type="text" 
+                placeholder="필요한 것만, 가져가구에서 찾아보세요..." 
+                class="flex-1 bg-transparent text-white placeholder-white/60 outline-none text-lg font-semibold"
+              />
+              <button class="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 transition-colors">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              지속 가능한 소비
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              중고가구 거래로 환경 보호에 기여하고 
-              경제적인 소비를 실현하세요
-            </p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- 최신 가구 섹션 -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
-            최신 등록 가구
-          </h2>
-          <NuxtLink
-            to="/furniture"
-            class="text-primary-600 hover:text-primary-700 font-semibold"
-          >
-            더 보기 →
-          </NuxtLink>
-        </div>
-
-        <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div v-for="i in 4" :key="i" class="animate-pulse">
-            <div class="bg-gray-200 dark:bg-gray-700 h-48 rounded-lg mb-4"></div>
-            <div class="bg-gray-200 dark:bg-gray-700 h-4 rounded mb-2"></div>
-            <div class="bg-gray-200 dark:bg-gray-700 h-4 rounded w-2/3"></div>
-          </div>
-        </div>
-
-        <div v-else-if="furnitureList.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <FurnitureCard
-            v-for="item in furnitureList.slice(0, 8)"
-            :key="item.id"
-            :furniture="item"
-          />
-        </div>
-
-        <div v-else class="text-center py-12">
-          <svg class="h-12 w-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-          </svg>
-          <p class="text-gray-500 dark:text-gray-400">
-            아직 등록된 가구가 없습니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 카테고리 섹션 -->
-    <section class="py-16 bg-white dark:bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            카테고리별 찾기
-          </h2>
-          <p class="text-lg text-gray-600 dark:text-gray-400">
-            원하는 카테고리에서 가구를 찾아보세요
-          </p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          <NuxtLink
-            v-for="category in categoriesList"
+      <!-- 카테고리 버튼 -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-black text-center mb-6 text-white/90">카테고리</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <button 
+            v-for="category in categoriesList" 
             :key="category.id"
-            :to="`/furniture?category=${category.id}`"
-            class="group p-4 text-center rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 transition-colors"
+            @click="selectCategory(category.id)"
+            :class="[
+              'group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:shadow-lg',
+              selectedCategory === category.id 
+                ? 'bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-xl' 
+                : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
+            ]"
           >
-            <div class="bg-primary-100 dark:bg-primary-900 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
-              <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-              </svg>
+            <div class="relative z-10 flex flex-col items-center">
+              <div :class="[
+                'w-12 h-12 mb-3 rounded-xl flex items-center justify-center transition-colors',
+                selectedCategory === category.id 
+                  ? 'bg-white/20' 
+                  : 'bg-white/20 group-hover:bg-white/30'
+              ]">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path v-if="category.name.includes('침대')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  <path v-else-if="category.name.includes('책상') || category.name.includes('식탁')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                  <path v-else-if="category.name.includes('전자')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                  <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <span class="font-black text-sm sm:text-base">{{ category.name }}</span>
             </div>
-            <span class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors">
-              {{ category.name }}
-            </span>
-          </NuxtLink>
+          </button>
         </div>
       </div>
-    </section>
+
+      <!-- 상품 목록 -->
+      <div class="mb-20">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-black text-white/90">
+            {{ getLocationDisplayName() }}{{ selectedCategory ? ` ${getCategoryName(selectedCategory)}` : '' }} 상품
+          </h2>
+          <span class="text-white/70 text-sm font-semibold">{{ filteredFurniture.length }}개의 상품</span>
+        </div>
+
+        <!-- 로딩 상태 -->
+        <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div v-for="i in 8" :key="i" class="bg-white/20 backdrop-blur-sm rounded-2xl overflow-hidden">
+            <div class="aspect-square bg-white/20"></div>
+            <div class="p-4">
+              <div class="h-4 bg-white/20 rounded mb-3"></div>
+              <div class="h-6 bg-white/20 rounded mb-2"></div>
+              <div class="h-3 bg-white/20 rounded w-2/3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 실제 상품 목록 -->
+        <div v-else-if="filteredFurniture.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div 
+            v-for="item in filteredFurniture" 
+            :key="item.id"
+            class="group bg-white/20 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300 border border-white/30"
+            @click="goToDetail(item.id)"
+          >
+            <div class="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+              <img 
+                v-if="item.images && item.images.length > 0"
+                :src="item.images[0]" 
+                :alt="item.title" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div v-else class="w-full h-full flex items-center justify-center">
+                <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              
+              <!-- 가격 배지 -->
+              <div class="absolute top-3 left-3">
+                <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-black shadow-lg">
+                  {{ formatPrice(item.price) }}원
+                </span>
+              </div>
+
+              <!-- 상태 배지 -->
+              <div class="absolute top-3 right-3">
+                <span class="bg-white/90 text-gray-900 px-2 py-1 rounded-full text-xs font-black">
+                  {{ getConditionText(item.condition) }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="p-4">
+              <h3 class="font-black text-white mb-2 text-lg line-clamp-2 group-hover:text-yellow-300 transition-colors">
+                {{ item.title }}
+              </h3>
+              <p class="text-white/70 text-sm mb-3 line-clamp-2 font-medium">{{ item.description }}</p>
+              
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-2 text-white/60">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span class="font-semibold">{{ item.location }}</span>
+                </div>
+                <span class="text-white/60 font-semibold">{{ formatTimeAgo(item.created_at) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 빈 상태 -->
+        <div v-else class="text-center py-16">
+          <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-12 max-w-md mx-auto">
+            <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-black text-white mb-2">
+              {{ selectedLocation ? `${getLocationDisplayName().trim()}에 등록된 상품이 없습니다` : '상품이 없습니다' }}
+            </h3>
+            <p class="text-white/70 mb-6 font-medium">
+              {{ selectedLocation ? `${getLocationDisplayName().trim()}에서 첫 번째 상품을 등록해보세요!` : '첫 번째 상품을 등록해보세요!' }}
+            </p>
+            <button 
+              @click="goToCreate"
+              class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-xl font-black hover:from-yellow-500 hover:to-orange-600 transition-colors"
+            >
+              상품 등록하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button 
+        class="group bg-gradient-to-r from-yellow-400 to-orange-500 text-white w-16 h-16 rounded-2xl shadow-2xl flex items-center justify-center hover:from-yellow-500 hover:to-orange-600 transition-colors"
+        @click="goToCreate"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 // SEO 설정
 useHead({
-  title: 'Get Your Furniture - 중고가구 거래 플랫폼',
+  title: '가져가구 - 중고가구 거래 플랫폼',
   meta: [
-    { name: 'description', content: '안전하고 편리한 중고가구 거래 플랫폼입니다. 믿을 수 있는 판매자와 구매자를 연결하여 지속 가능한 소비를 도와드립니다.' }
+    { name: 'description', content: '필요한 것만, 가져가구. 안전하고 편리한 중고가구 거래 플랫폼입니다.' }
   ]
 })
 
+// 상태 관리
+const searchQuery = ref('')
+const selectedCategory = ref<string | null>(null)
+const selectedLocation = ref<'insa' | 'jagwa' | null>(null)
+
+// 스토어 사용
 const furnitureStore = useFurnitureStore()
 const { furnitureList, categoriesList, loading } = storeToRefs(furnitureStore)
+
+// 필터링된 상품 목록
+const filteredFurniture = computed(() => {
+  let filtered = furnitureList.value
+
+  // 카테고리 필터
+  if (selectedCategory.value) {
+    filtered = filtered.filter(item => item.category?.id === selectedCategory.value)
+  }
+
+  // 지역 필터
+  if (selectedLocation.value) {
+    filtered = filtered.filter(item => item.location === selectedLocation.value)
+  }
+
+  // 검색 필터
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase()
+    filtered = filtered.filter(item => 
+      item.title.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query)
+    )
+  }
+
+  return filtered
+})
+
+// 카테고리 선택
+const selectCategory = (categoryId: string) => {
+  selectedCategory.value = selectedCategory.value === categoryId ? null : categoryId
+}
+
+// 지역 선택
+const selectLocation = (location: 'insa' | 'jagwa') => {
+  selectedLocation.value = selectedLocation.value === location ? null : location
+}
+
+// 카테고리 이름 가져오기
+const getCategoryName = (categoryId: string) => {
+  const category = categoriesList.value.find(cat => cat.id === categoryId)
+  return category?.name || ''
+}
+
+// 가격 포맷팅
+const formatPrice = (price: number) => {
+  return price.toLocaleString()
+}
+
+// 시간 포맷팅
+const formatTimeAgo = (dateString: string) => {
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffTime = Math.abs(now.getTime() - date.getTime())
+  const diffMinutes = Math.ceil(diffTime / (1000 * 60))
+  
+  if (diffMinutes < 60) return `${diffMinutes}분 전`
+  if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)}시간 전`
+  if (diffMinutes < 10080) return `${Math.floor(diffMinutes / 1440)}일 전`
+  return `${Math.floor(diffMinutes / 10080)}주 전`
+}
+
+// 상태별 텍스트
+const getConditionText = (condition: string) => {
+  const texts = {
+    new: '새상품',
+    like_new: '거의 새상품',
+    good: '양호',
+    fair: '보통',
+    poor: '하자있음'
+  }
+  return texts[condition as keyof typeof texts] || '양호'
+}
+
+// 페이지 이동
+const router = useRouter()
+
+const goToDetail = (id: string) => {
+  router.push(`/furniture/${id}`)
+}
+
+const goToCreate = () => {
+  router.push('/furniture/create')
+}
 
 // 페이지 로드 시 데이터 가져오기
 onMounted(async () => {
   try {
     await Promise.all([
       furnitureStore.getAllFurniture({ is_sold: false }, 1),
-      furnitureStore.getAllCategories()
+      // furnitureStore.getAllCategories() // 카테고리 데이터는 하드코딩으로 변경되었으므로 제거
     ])
   } catch (error) {
     console.error('데이터 로드 실패:', error)
   }
 })
+
+// 지역 표시 이름 가져오기
+const getLocationDisplayName = () => {
+  if (selectedLocation.value === 'insa') {
+    return '명륜 '
+  } else if (selectedLocation.value === 'jagwa') {
+    return '율전 '
+  }
+  return ''
+}
 </script>
+
+<style scoped>
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #fbbf24, #f97316);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #f59e0b, #ea580c);
+}
+</style>

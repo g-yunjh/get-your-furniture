@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
-import { furniture, categories } from '~/utils/supabase'
+import { furniture } from '~/utils/supabase'
 import type { Furniture, Category, SearchFilters, Pagination } from '~/types'
 
 export const useFurnitureStore = defineStore('furniture', () => {
   const furnitureList = ref<Furniture[]>([])
-  const categoriesList = ref<Category[]>([])
   const currentFurniture = ref<Furniture | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -14,6 +13,14 @@ export const useFurnitureStore = defineStore('furniture', () => {
     total: 0,
     total_pages: 0
   })
+
+  // 카테고리 데이터 (하드코딩)
+  const categoriesList = ref<Category[]>([
+    { id: 'cat-1', name: '침대' },
+    { id: 'cat-2', name: '책상/식탁' },
+    { id: 'cat-3', name: '전자제품' },
+    { id: 'cat-4', name: '기타' }
+  ])
 
   // 모든 가구 가져오기
   const getAllFurniture = async (filters?: SearchFilters, page = 1) => {
@@ -112,21 +119,6 @@ export const useFurnitureStore = defineStore('furniture', () => {
     }
   }
 
-  // 모든 카테고리 가져오기
-  const getAllCategories = async () => {
-    try {
-      loading.value = true
-      error.value = null
-      const result = await categories.getAll()
-      categoriesList.value = result
-    } catch (err: any) {
-      error.value = err.message
-      throw err
-    } finally {
-      loading.value = false
-    }
-  }
-
   // 에러 초기화
   const clearError = () => {
     error.value = null
@@ -149,7 +141,6 @@ export const useFurnitureStore = defineStore('furniture', () => {
     createFurniture,
     updateFurniture,
     deleteFurniture,
-    getAllCategories,
     clearError,
     clearCurrentFurniture
   }

@@ -69,8 +69,7 @@ export const furniture = {
       .from('furniture')
       .select(`
         *,
-        seller:users(name, avatar_url),
-        category:categories(name)
+        seller:users(name, avatar_url)
       `)
       .order('created_at', { ascending: false })
 
@@ -89,7 +88,7 @@ export const furniture = {
         query = query.in('condition', filters.condition)
       }
       if (filters.location) {
-        query = query.ilike('location', `%${filters.location}%`)
+        query = query.eq('location', filters.location)
       }
       if (filters.is_sold !== undefined) {
         query = query.eq('is_sold', filters.is_sold)
@@ -122,8 +121,7 @@ export const furniture = {
       .from('furniture')
       .select(`
         *,
-        seller:users(name, avatar_url),
-        category:categories(name)
+        seller:users(name, avatar_url)
       `)
       .eq('id', id)
       .single()
@@ -168,21 +166,6 @@ export const furniture = {
       .eq('id', id)
 
     if (error) throw error
-  }
-}
-
-// 카테고리 관련 유틸리티
-export const categories = {
-  // 모든 카테고리 가져오기
-  async getAll() {
-    const supabase = createSupabaseClient()
-    const { data, error } = await supabase
-      .from('categories')
-      .select('*')
-      .order('name')
-
-    if (error) throw error
-    return data
   }
 }
 
