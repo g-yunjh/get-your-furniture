@@ -1,54 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white font-sans">
-    <!-- 네비게이션 바 -->
-    <nav class="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <!-- 로고 -->
-          <div class="flex items-center space-x-3 group cursor-pointer">
-            <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-              </svg>
-            </div>
-            <span class="text-xl font-black bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              가져가구
-            </span>
-          </div>
-
-          <!-- 데스크톱 메뉴 -->
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">홈</a>
-            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">카테고리</a>
-            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">인기상품</a>
-            <a href="#" class="text-white/80 hover:text-white transition-colors font-semibold">내 상품</a>
-          </div>
-
-          <!-- 우측 메뉴 -->
-          <div class="flex items-center space-x-4">
-            <!-- 알림 -->
-            <button class="relative p-2 text-white/80 hover:text-white transition-colors">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.19 4.19A4 4 0 014 6v6m0 0v6a4 4 0 004 4h6a4 4 0 004-4v-6m-8-4a4 4 0 00-4-4H6a4 4 0 00-4 4v6h8V6z"></path>
-              </svg>
-              <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-            </button>
-
-            <!-- 프로필 -->
-            <button class="w-8 h-8 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
-              <span class="text-white font-bold text-sm">U</span>
-            </button>
-
-            <!-- 모바일 메뉴 버튼 -->
-            <button class="md:hidden p-2 text-white/80 hover:text-white transition-colors">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <!-- 전역 레이아웃의 AppHeader 사용 (중복 제거) -->
 
     <!-- 메인 콘텐츠 -->
     <div class="px-4 py-6 sm:px-6 lg:px-8">
@@ -131,7 +83,7 @@
               <input 
                 v-model="searchQuery"
                 type="text" 
-                placeholder="필요한 것만, 가져가구에서 찾아보세요..." 
+                placeholder="Get your furniture, get your future!" 
                 class="flex-1 bg-transparent text-white placeholder-white/60 outline-none text-lg font-semibold"
               />
               <button class="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 transition-colors">
@@ -167,10 +119,10 @@
                   : 'bg-white/20 group-hover:bg-white/30'
               ]">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path v-if="category.name.includes('침대')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                  <path v-else-if="category.name.includes('책상') || category.name.includes('식탁')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
-                  <path v-else-if="category.name.includes('전자')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                  <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  <path v-if="category.name.includes('침대')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9h6v3H5zM3 12h18v6H3z"></path>
+                  <path v-else-if="category.name.includes('책상') || category.name.includes('식탁')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16M6 10v6M18 10v6M4 16h16"></path>
+                  <path v-else-if="category.name.includes('전자')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v10H4zM9 20h6"></path>
+                  <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13h8M9 7h6M9 7v6M15 7v6M7 19h10"></path>
                 </svg>
               </div>
               <span class="font-black text-sm sm:text-base">{{ category.name }}</span>
