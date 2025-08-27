@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly>
   <nav class="sticky top-0 z-50 bg-gradient-to-r from-purple-800/90 via-pink-700/90 to-orange-600/90 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
@@ -14,6 +15,7 @@
 
         <!-- 네비게이션 -->
         <nav class="hidden md:flex items-center space-x-8">
+          <NuxtLink to="/" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">가구 둘러보기</NuxtLink>
           <NuxtLink to="/furniture/create" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">내 가구 팔기</NuxtLink>
           <NuxtLink to="/about" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">서비스 소개</NuxtLink>
           <NuxtLink to="/faq" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">자주 묻는 질문</NuxtLink>
@@ -91,6 +93,7 @@
       </div>
     </div>
   </nav>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
