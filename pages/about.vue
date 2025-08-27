@@ -1,24 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Hero -->
-    <section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
-      <!-- Floating shapes -->
-      <div class="pointer-events-none absolute inset-0">
-        <div ref="shape1" class="absolute w-20 h-20 rounded-full bg-white/10 top-1/5 left-10"></div>
-        <div ref="shape2" class="absolute w-28 h-28 rounded-full bg-white/10 bottom-1/5 right-10"></div>
-        <div ref="shape3" class="absolute w-16 h-16 rounded-full bg-white/10 bottom-10 left-1/5"></div>
-      </div>
-
-      <div class="relative z-10 text-center max-w-3xl px-6 pt-12 pb-8">
+    <!-- Hero (aligned with FAQ page) -->
+    <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
+      <div class="relative z-10 text-center max-w-3xl px-6 py-16">
         <h1 class="text-4xl sm:text-5xl font-extrabold mb-2 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent drop-shadow">
           가져가구
         </h1>
         <p class="text-lg sm:text-xl font-medium text-white/95 mb-3">중고 가구 순환 플랫폼</p>
-        <p class="text-white/90 leading-relaxed text-sm sm:text-base mb-4 max-w-2xl mx-auto">
-          쓰지 않는 가구를 간단히 등록하면, 필요한 사람이 쉽게 구매할 수 있습니다.<br>
-          무겁고 번거로운 운반은 저희가 맡습니다. 고객님은 등록만 하시면 됩니다.
+        <p class="text-white/90 leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
+          쓰지 않는 가구는 간단히 등록만 하세요<br>
+          필요한 사람이 쉽게 찾아가고, 운반은 저희가 책임집니다
         </p>
-        
       </div>
     </section>
 
@@ -45,13 +37,13 @@
 
       <div v-observe class="mt-10 bg-white rounded-2xl border border-gray-200 shadow-md p-6 text-center">
         <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-          <span class="text-primary-700 font-semibold">가져가구</span>는 중고 가구 거래와 배송을 한 번에 해결하는 중고 가구 순환 플랫폼입니다.<br><br>
-          저희는 복잡한 중고 거래 과정을 간소화하고, 아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다.<br><br>
-          더 나은 환경을 위해, 더 편리한 거래를 위해 가져가구가 함께합니다.
+          <span class="text-primary-700 font-semibold">가져가구</span>는 중고 가구 거래와 배송을 한 번에 해결하는 중고 가구 순환 플랫폼입니다<br><br>
+          저희는 복잡한 중고 거래 과정을 간소화하고, 아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다<br><br>
+          더 나은 환경을 위해, 더 편리한 거래를 위해 가져가구가 함께합니다
         </p>
       </div>
 
-      <p v-observe class="text-center text-lg sm:text-xl font-bold text-gray-900 mt-10">가구는 무겁지만, 거래는 가볍게.</p>
+      <p v-observe class="text-center text-lg sm:text-xl font-bold text-gray-900 mt-10">가구는 무겁지만, 거래는 가볍게!</p>
     </section>
 
     <!-- Final CTA -->
