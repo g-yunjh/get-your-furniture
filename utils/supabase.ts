@@ -10,56 +10,6 @@ export const createSupabaseClient = () => {
   )
 }
 
-// 인증 관련 유틸리티
-export const auth = {
-  // 현재 사용자 가져오기
-  async getCurrentUser() {
-    const supabase = createSupabaseClient()
-    const { data: { user }, error } = await supabase.auth.getUser()
-    if (error) throw error
-    return user
-  },
-
-  // 로그인
-  async signIn(email: string, password: string) {
-    const supabase = createSupabaseClient()
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-    if (error) throw error
-    return data
-  },
-
-  // 회원가입
-  async signUp(email: string, password: string, name: string) {
-    const supabase = createSupabaseClient()
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { name }
-      }
-    })
-    if (error) throw error
-    return data
-  },
-
-  // 로그아웃
-  async signOut() {
-    const supabase = createSupabaseClient()
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-  },
-
-  // 비밀번호 재설정
-  async resetPassword(email: string) {
-    const supabase = createSupabaseClient()
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
-    if (error) throw error
-  }
-}
-
 // 가구 관련 유틸리티
 export const furniture = {
   // 모든 가구 가져오기

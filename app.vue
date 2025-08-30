@@ -8,16 +8,7 @@
 </template>
 
 <script setup lang="ts">
-// 앱 초기화 시 사용자 정보 가져오기
-const authStore = useAuthStore()
-
-onMounted(async () => {
-  try {
-    await authStore.getCurrentUser()
-  } catch (error) {
-    console.error('사용자 정보 로드 실패:', error)
-  }
-})
+// 인증 관련 코드 제거됨
 </script>
 
 <style>
