@@ -97,7 +97,7 @@
       </div>
 
       <!-- 카테고리 버튼 -->
-      <div class="mb-8">
+      <div id="categories" class="mb-8">
         <h2 class="text-2xl font-black text-center mb-6 text-white/90">카테고리</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
           <button 
@@ -132,7 +132,7 @@
       </div>
 
       <!-- 상품 목록 -->
-      <div class="mb-20">
+      <div id="furniture-list" class="mb-20">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-2xl font-black text-white/90">
             {{ getLocationDisplayName() }}{{ selectedCategory ? ` ${getCategoryName(selectedCategory)}` : '' }} 상품

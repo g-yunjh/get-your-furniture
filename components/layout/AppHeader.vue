@@ -6,16 +6,14 @@
         <!-- 로고 -->
         <NuxtLink to="/" class="flex items-center space-x-3 group cursor-pointer">
           <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-            </svg>
+            <img src="/logo.svg" alt="가져가구 로고" class="w-6 h-6 brightness-0 invert" />
           </div>
           <span class="text-xl font-black bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">가져가구</span>
         </NuxtLink>
 
         <!-- 네비게이션 -->
         <nav class="hidden md:flex items-center space-x-8">
-          <NuxtLink to="/" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">가구 둘러보기</NuxtLink>
+          <NuxtLink to="/#categories" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">가구 둘러보기</NuxtLink>
           <NuxtLink to="/furniture/create" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">내 가구 팔기</NuxtLink>
           <NuxtLink to="/about" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">서비스 소개</NuxtLink>
           <NuxtLink to="/faq" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">자주 묻는 질문</NuxtLink>
