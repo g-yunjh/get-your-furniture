@@ -200,5 +200,123 @@ export const storage = {
       .remove([path])
 
     if (error) throw error
+  },
+
+  // 문의 첨부파일 업로드
+  async uploadContactAttachment(file: File, path: string) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase.storage
+      .from('contact-attachments')
+      .upload(path, file)
+
+    if (error) throw error
+    return data
+  },
+
+  // 문의 첨부파일 URL 가져오기
+  getContactAttachmentUrl(path: string) {
+    const supabase = createSupabaseClient()
+    const { data } = supabase.storage
+      .from('contact-attachments')
+      .getPublicUrl(path)
+
+    return data.publicUrl
+  },
+
+  // 문의 첨부파일 삭제
+  async deleteContactAttachment(path: string) {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase.storage
+      .from('contact-attachments')
+      .remove([path])
+
+    if (error) throw error
+  }
+}
+
+// 문의 관련 유틸리티
+export const contact = {
+  // 문의 생성
+  async create(contactData: any) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert(contactData)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  // 모든 문의 가져오기 (관리자용)
+  async getAll(page = 1, limit = 20) {
+    const supabase = createSupabaseClient()
+    const from = (page - 1) * limit
+    const to = from + limit - 1
+
+    const { data, error, count } = await supabase
+      .from('contacts')
+      .select(`
+        *,
+        attachments:contact_attachments(*)
+      `)
+      .order('created_at', { ascending: false })
+      .range(from, to)
+
+    if (error) throw error
+
+    return {
+      data: data || [],
+      pagination: {
+        page,
+        limit,
+        total: count || 0,
+        total_pages: Math.ceil((count || 0) / limit)
+      }
+    }
+  },
+
+  // 단일 문의 가져오기
+  async getById(id: string) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+      .from('contacts')
+      .select(`
+        *,
+        attachments:contact_attachments(*)
+      `)
+      .eq('id', id)
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  // 문의 상태 업데이트
+  async updateStatus(id: string, status: string) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+      .from('contacts')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  // 첨부파일 정보 저장
+  async saveAttachment(attachmentData: any) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+      .from('contact_attachments')
+      .insert(attachmentData)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
   }
 }
