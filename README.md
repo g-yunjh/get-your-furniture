@@ -19,9 +19,26 @@
 - 🔍 가구 검색 및 필터링
 - 📱 반응형 디자인
 - 🌙 다크모드 지원
-- 📸 이미지 업로드
+- 📸 이미지 업로드 (최대 5장)
 - 📍 지역 기반 매칭
 - 💰 가격 정보 표시
+- 💬 채팅 링크 연결 (카카오톡 오픈채팅방 등)
+- 🔑 비회원 수정/삭제 (비밀번호 기반)
+- 🖼️ 이미지 캐러셀 (상세 페이지)
+
+## 🆕 새로운 기능
+
+### 비회원 기능
+- 회원가입 없이도 제품 등록 가능
+- 등록 시 비밀번호 설정으로 수정/삭제 권한 관리
+- 디시인사이드 스타일의 간편한 관리 시스템
+
+### 제품 상세 페이지
+- 이미지 캐러셀 (키보드 화살표 키 지원)
+- 판매자 정보 표시
+- 채팅 링크 연결
+- 비회원 수정/삭제 기능
+- 연락처 입력 모달
 
 ## 🛠️ 설치 및 설정
 
@@ -74,18 +91,22 @@ CREATE TABLE categories (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 가구 테이블
+-- 가구 테이블 (비회원 기능 포함)
 CREATE TABLE furniture (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   price INTEGER NOT NULL,
   category_id UUID REFERENCES categories(id),
-  seller_id UUID REFERENCES users(id),
+  seller_id UUID REFERENCES users(id), -- nullable (비회원 등록 가능)
+  seller_name TEXT, -- 비회원 판매자 이름
+  seller_phone TEXT, -- 비회원 연락처
   condition TEXT CHECK (condition IN ('new', 'like_new', 'good', 'fair', 'poor')),
   location TEXT NOT NULL,
   images TEXT[] DEFAULT '{}',
   is_sold BOOLEAN DEFAULT FALSE,
+  password TEXT, -- 비회원 수정/삭제용 비밀번호
+  chat_link TEXT, -- 채팅 링크 (카카오톡 오픈채팅방 등)
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -102,11 +123,20 @@ CREATE POLICY "Users can update own profile" ON users FOR UPDATE USING (auth.uid
 -- 카테고리 정책
 CREATE POLICY "Categories are viewable by everyone" ON categories FOR SELECT USING (true);
 
--- 가구 정책
+-- 가구 정책 (비회원 기능 포함)
 CREATE POLICY "Furniture is viewable by everyone" ON furniture FOR SELECT USING (true);
-CREATE POLICY "Users can insert own furniture" ON furniture FOR INSERT WITH CHECK (auth.uid() = seller_id);
-CREATE POLICY "Users can update own furniture" ON furniture FOR UPDATE USING (auth.uid() = seller_id);
-CREATE POLICY "Users can delete own furniture" ON furniture FOR DELETE USING (auth.uid() = seller_id);
+CREATE POLICY "Users can insert own furniture" ON furniture FOR INSERT WITH CHECK (
+  auth.uid() = seller_id OR 
+  (seller_id IS NULL AND password IS NOT NULL)
+);
+CREATE POLICY "Users can update own furniture" ON furniture FOR UPDATE USING (
+  auth.uid() = seller_id OR 
+  (seller_id IS NULL AND password IS NOT NULL)
+);
+CREATE POLICY "Users can delete own furniture" ON furniture FOR DELETE USING (
+  auth.uid() = seller_id OR 
+  (seller_id IS NULL AND password IS NOT NULL)
+);
 
 -- 기본 카테고리 데이터 삽입
 INSERT INTO categories (name, description) VALUES
@@ -130,84 +160,65 @@ npm run dev
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
-## 📁 프로젝트 구조
+## 📱 주요 페이지
 
-```
-get-your-furniture/
-├── app.vue                 # 메인 앱 레이아웃
-├── nuxt.config.ts          # Nuxt 설정
-├── package.json            # 의존성 및 스크립트
-├── tsconfig.json           # TypeScript 설정
-├── assets/
-│   └── css/
-│       └── main.css        # 전역 스타일
-├── components/
-│   ├── layout/             # 레이아웃 컴포넌트
-│   │   ├── AppHeader.vue
-│   │   └── AppFooter.vue
-│   ├── furniture/          # 가구 관련 컴포넌트
-│   │   └── FurnitureCard.vue
-│   └── ui/                 # UI 컴포넌트
-├── composables/            # 컴포저블 함수
-├── pages/                  # 페이지 컴포넌트
-│   ├── index.vue           # 홈페이지
-│   ├── furniture/          # 가구 관련 페이지
-│   └── auth/               # 인증 관련 페이지
-├── stores/                 # Pinia 스토어
-│   ├── auth.ts
-│   └── furniture.ts
-├── types/                  # TypeScript 타입 정의
-│   ├── index.ts
-│   └── supabase.ts
-└── utils/                  # 유틸리티 함수
-    └── supabase.ts         # Supabase 클라이언트
-```
+### 홈페이지 (`/`)
+- 제품 목록 표시
+- 검색 및 필터링
+- 반응형 그리드 레이아웃
 
-## 🚀 배포 (Vercel)
+### 제품 상세 페이지 (`/furniture/[id]`)
+- 이미지 캐러셀 (키보드 네비게이션 지원)
+- 제품 정보 및 판매자 정보
+- 채팅 링크 연결
+- 비회원 수정/삭제 기능
 
-### 1. Vercel CLI 설치
+### 제품 수정 페이지 (`/furniture/[id]/edit`)
+- 비밀번호 검증 후 수정 폼 제공
+- 이미지 업로드/삭제
+- 모든 제품 정보 수정 가능
 
-```bash
-npm i -g vercel
-```
+## 🔧 API 구조
 
-### 2. Vercel에 배포
+### 가구 관련 API
+- `GET /api/furniture` - 제품 목록 조회
+- `GET /api/furniture/[id]` - 단일 제품 조회
+- `POST /api/furniture` - 제품 등록
+- `PUT /api/furniture/[id]` - 제품 수정
+- `DELETE /api/furniture/[id]` - 제품 삭제
 
-```bash
-vercel
-```
+### 비회원 기능
+- 비밀번호 검증을 통한 수정/삭제
+- 회원가입 없이 제품 등록 가능
 
-### 3. 환경 변수 설정
+## 🎨 UI/UX 특징
 
-Vercel 대시보드에서 다음 환경 변수를 설정하세요:
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- **반응형 디자인**: 모바일, 태블릿, 데스크톱 지원
+- **다크모드**: 시스템 설정에 따른 자동 전환
+- **이미지 캐러셀**: 터치/마우스/키보드 네비게이션
+- **로딩 상태**: 스켈레톤 로딩 및 스피너
+- **에러 처리**: 사용자 친화적인 에러 메시지
 
-## 🔧 개발 가이드
+## 🔒 보안
 
-### 새로운 페이지 추가
+- Row Level Security (RLS) 적용
+- 비밀번호 기반 비회원 권한 관리
+- 이미지 업로드 검증
+- XSS 방지
+
+## 🚀 배포
+
+### Vercel 배포
+
+1. Vercel에 프로젝트 연결
+2. 환경 변수 설정
+3. 자동 배포 설정
 
 ```bash
-# pages 디렉토리에 Vue 파일 생성
-touch pages/new-page.vue
+npm run build
 ```
 
-### 새로운 컴포넌트 추가
-
-```bash
-# components 디렉토리에 Vue 파일 생성
-touch components/NewComponent.vue
-```
-
-### 스토어 사용
-
-```typescript
-// 컴포넌트에서 스토어 사용
-const authStore = useAuthStore()
-const furnitureStore = useFurnitureStore()
-```
-
-## 📝 라이센스
+## 📝 라이선스
 
 MIT License
 
@@ -221,4 +232,4 @@ MIT License
 
 ## 📞 문의
 
-프로젝트에 대한 문의사항이 있으시면 이슈를 생성해 주세요.
+프로젝트에 대한 문의사항이 있으시면 이슈를 생성해주세요.

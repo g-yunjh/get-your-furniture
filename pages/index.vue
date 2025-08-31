@@ -72,62 +72,47 @@
         </div>
       </div>
 
-      <!-- 검색바 -->
-      <div class="max-w-2xl mx-auto mb-8">
-        <div class="relative group">
-          <div class="bg-white/20 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/30">
-            <div class="flex items-center space-x-4">
-              <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-              <input 
-                v-model="searchQuery"
-                type="text" 
-                placeholder="Get your furniture, get your future!" 
-                class="flex-1 bg-transparent text-white placeholder-white/60 outline-none text-lg font-semibold"
-              />
-              <button class="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 transition-colors">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </button>
-            </div>
+      <!-- 검색 및 필터 -->
+      <div class="mb-8">
+        <div class="max-w-4xl mx-auto">
+          <!-- 검색바 -->
+          <div class="relative mb-6">
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="검색어를 입력해주세요"
+              class="w-full px-6 py-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            />
+            <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
           </div>
-        </div>
-      </div>
 
-      <!-- 카테고리 버튼 -->
-      <div id="categories" class="mb-8">
-        <h2 class="text-2xl font-black text-center mb-6 text-white/90">카테고리</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          <button 
-            v-for="category in categoriesList" 
-            :key="category.id"
-            @click="selectCategory(category.id)"
-            :class="[
-              'group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:shadow-lg',
-              selectedCategory === category.id 
-                ? 'bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-xl' 
-                : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
-            ]"
-          >
-            <div class="relative z-10 flex flex-col items-center">
-              <div :class="[
-                'w-12 h-12 mb-3 rounded-xl flex items-center justify-center transition-colors',
-                selectedCategory === category.id 
-                  ? 'bg-white/20' 
-                  : 'bg-white/20 group-hover:bg-white/30'
-              ]">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path v-if="category.name.includes('침대')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9h6v3H5zM3 12h18v6H3z"></path>
-                  <path v-else-if="category.name.includes('책상') || category.name.includes('식탁')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16M6 10v6M18 10v6M4 16h16"></path>
-                  <path v-else-if="category.name.includes('전자')" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v10H4zM9 20h6"></path>
-                  <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13h8M9 7h6M9 7v6M15 7v6M7 19h10"></path>
-                </svg>
-              </div>
-              <span class="font-black text-sm sm:text-base">{{ category.name }}</span>
-            </div>
-          </button>
+          <!-- 지역 필터 -->
+          <div class="flex flex-wrap gap-3 justify-center">
+            <button 
+              @click="selectLocation('insa')"
+              :class="[
+                'px-6 py-3 rounded-xl font-semibold transition-all duration-300',
+                selectedLocation === 'insa' 
+                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
+                  : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
+              ]"
+            >
+              인사동
+            </button>
+            <button 
+              @click="selectLocation('jagwa')"
+              :class="[
+                'px-6 py-3 rounded-xl font-semibold transition-all duration-300',
+                selectedLocation === 'jagwa' 
+                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
+                  : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
+              ]"
+            >
+              자과촌
+            </button>
+          </div>
         </div>
       </div>
 
@@ -135,7 +120,7 @@
       <div id="furniture-list" class="mb-20">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-2xl font-black text-white/90">
-            {{ getLocationDisplayName() }}{{ selectedCategory ? ` ${getCategoryName(selectedCategory)}` : '' }} 상품
+            {{ getLocationDisplayName() }} 상품
           </h2>
           <span class="text-white/70 text-sm font-semibold">{{ filteredFurniture.length }}개의 상품</span>
         </div>
@@ -258,21 +243,15 @@ useHead({
 
 // 상태 관리
 const searchQuery = ref('')
-const selectedCategory = ref<string | null>(null)
 const selectedLocation = ref<'insa' | 'jagwa' | null>(null)
 
 // 스토어 사용
 const furnitureStore = useFurnitureStore()
-const { furnitureList, categoriesList, loading } = storeToRefs(furnitureStore)
+const { furnitureList, loading } = storeToRefs(furnitureStore)
 
 // 필터링된 상품 목록
 const filteredFurniture = computed(() => {
   let filtered = furnitureList.value
-
-  // 카테고리 필터
-  if (selectedCategory.value) {
-    filtered = filtered.filter(item => item.category?.id === selectedCategory.value)
-  }
 
   // 지역 필터
   if (selectedLocation.value) {
@@ -291,20 +270,9 @@ const filteredFurniture = computed(() => {
   return filtered
 })
 
-// 카테고리 선택
-const selectCategory = (categoryId: string) => {
-  selectedCategory.value = selectedCategory.value === categoryId ? null : categoryId
-}
-
 // 지역 선택
 const selectLocation = (location: 'insa' | 'jagwa') => {
   selectedLocation.value = selectedLocation.value === location ? null : location
-}
-
-// 카테고리 이름 가져오기
-const getCategoryName = (categoryId: string) => {
-  const category = categoriesList.value.find(cat => cat.id === categoryId)
-  return category?.name || ''
 }
 
 // 가격 포맷팅

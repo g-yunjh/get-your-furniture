@@ -1,48 +1,33 @@
-// 사용자 타입
-export interface User {
-  id: string
-  email: string
-  name: string
-  avatar_url?: string
-  created_at: string
-  updated_at: string
-}
-
-// 가구 카테고리 타입
-export interface Category {
-  id: string
-  name: string
-  description?: string
-  icon?: string
-}
-
 // 가구 상품 타입
 export interface Furniture {
   id: string
   title: string
   description: string
   price: number
-  category_id: string
-  seller_id: string
+  seller_name: string
+  seller_phone: string
   condition: 'new' | 'like_new' | 'good' | 'fair' | 'poor'
   location: string
   images: string[]
   is_sold: boolean
+  password: string
+  chat_link: string | null
   created_at: string
   updated_at: string
-  seller?: User
-  category?: Category
 }
 
-// 가구 상품 생성 타입
+// 가구 생성 타입
 export interface CreateFurniture {
   title: string
   description: string
   price: number
-  category_id: string
+  seller_name: string
+  seller_phone: string
   condition: 'new' | 'like_new' | 'good' | 'fair' | 'poor'
   location: string
   images: string[]
+  password: string
+  chat_link?: string
 }
 
 // 가구 상품 업데이트 타입

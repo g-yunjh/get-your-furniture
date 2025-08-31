@@ -17,17 +17,11 @@ export const furniture = {
     const supabase = createSupabaseClient()
     let query = supabase
       .from('furniture')
-      .select(`
-        *,
-        seller:users(name, avatar_url)
-      `)
+      .select('*')
       .order('created_at', { ascending: false })
 
     // 필터 적용
     if (filters) {
-      if (filters.category_id) {
-        query = query.eq('category_id', filters.category_id)
-      }
       if (filters.min_price) {
         query = query.gte('price', filters.min_price)
       }
@@ -69,10 +63,7 @@ export const furniture = {
     const supabase = createSupabaseClient()
     const { data, error } = await supabase
       .from('furniture')
-      .select(`
-        *,
-        seller:users(name, avatar_url)
-      `)
+      .select('*')
       .eq('id', id)
       .single()
 
@@ -116,6 +107,49 @@ export const furniture = {
       .eq('id', id)
 
     if (error) throw error
+  },
+
+  // 비밀번호 검증 (비회원 수정/삭제용)
+  async verifyPassword(id: string, password: string) {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+      .from('furniture')
+      .select('password')
+      .eq('id', id)
+      .single()
+
+    if (error) throw error
+    
+    // 비밀번호가 설정되어 있지 않은 경우 (회원 등록)
+    if (!data.password) {
+      return false
+    }
+    
+    return data.password === password
+  },
+
+  // 비밀번호로 가구 업데이트 (비회원용)
+  async updateWithPassword(id: string, password: string, furnitureData: any) {
+    // 비밀번호 검증
+    const isValid = await this.verifyPassword(id, password)
+    if (!isValid) {
+      throw new Error('비밀번호가 일치하지 않습니다.')
+    }
+
+    // 업데이트 실행
+    return await this.update(id, furnitureData)
+  },
+
+  // 비밀번호로 가구 삭제 (비회원용)
+  async deleteWithPassword(id: string, password: string) {
+    // 비밀번호 검증
+    const isValid = await this.verifyPassword(id, password)
+    if (!isValid) {
+      throw new Error('비밀번호가 일치하지 않습니다.')
+    }
+
+    // 삭제 실행
+    return await this.delete(id)
   }
 }
 

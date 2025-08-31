@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { furniture } from '~/utils/supabase'
-import type { Furniture, Category, SearchFilters, Pagination } from '~/types'
+import type { Furniture, SearchFilters, Pagination } from '~/types'
 
 export const useFurnitureStore = defineStore('furniture', () => {
   const furnitureList = ref<Furniture[]>([])
@@ -13,14 +13,6 @@ export const useFurnitureStore = defineStore('furniture', () => {
     total: 0,
     total_pages: 0
   })
-
-  // 카테고리 데이터 (하드코딩)
-  const categoriesList = ref<Category[]>([
-    { id: 'cat-1', name: '침대' },
-    { id: 'cat-2', name: '책상/식탁' },
-    { id: 'cat-3', name: '전자제품' },
-    { id: 'cat-4', name: '기타' }
-  ])
 
   // 모든 가구 가져오기
   const getAllFurniture = async (filters?: SearchFilters, page = 1) => {
@@ -119,6 +111,65 @@ export const useFurnitureStore = defineStore('furniture', () => {
     }
   }
 
+  // 비밀번호로 가구 업데이트 (비회원용)
+  const updateFurnitureWithPassword = async (id: string, password: string, furnitureData: any) => {
+    try {
+      loading.value = true
+      error.value = null
+      const result = await furniture.updateWithPassword(id, password, furnitureData)
+      
+      // 리스트에서 업데이트
+      const index = furnitureList.value.findIndex(item => item.id === id)
+      if (index !== -1) {
+        furnitureList.value[index] = result
+      }
+      
+      // 현재 가구가 업데이트된 가구라면 업데이트
+      if (currentFurniture.value?.id === id) {
+        currentFurniture.value = result
+      }
+      
+      return result
+    } catch (err: any) {
+      error.value = err.message
+      throw err
+    } finally {
+      loading.value = false
+    }
+  }
+
+  // 비밀번호로 가구 삭제 (비회원용)
+  const deleteFurnitureWithPassword = async (id: string, password: string) => {
+    try {
+      loading.value = true
+      error.value = null
+      await furniture.deleteWithPassword(id, password)
+      
+      // 리스트에서 제거
+      furnitureList.value = furnitureList.value.filter(item => item.id !== id)
+      
+      // 현재 가구가 삭제된 가구라면 초기화
+      if (currentFurniture.value?.id === id) {
+        currentFurniture.value = null
+      }
+    } catch (err: any) {
+      error.value = err.message
+      throw err
+    } finally {
+      loading.value = false
+    }
+  }
+
+  // 비밀번호 검증
+  const verifyPassword = async (id: string, password: string) => {
+    try {
+      return await furniture.verifyPassword(id, password)
+    } catch (err: any) {
+      error.value = err.message
+      throw err
+    }
+  }
+
   // 에러 초기화
   const clearError = () => {
     error.value = null
@@ -131,7 +182,6 @@ export const useFurnitureStore = defineStore('furniture', () => {
 
   return {
     furnitureList: readonly(furnitureList),
-    categoriesList: readonly(categoriesList),
     currentFurniture: readonly(currentFurniture),
     loading: readonly(loading),
     error: readonly(error),
@@ -141,6 +191,9 @@ export const useFurnitureStore = defineStore('furniture', () => {
     createFurniture,
     updateFurniture,
     deleteFurniture,
+    updateFurnitureWithPassword,
+    deleteFurnitureWithPassword,
+    verifyPassword,
     clearError,
     clearCurrentFurniture
   }
