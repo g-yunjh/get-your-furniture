@@ -4,7 +4,6 @@ export interface Furniture {
   title: string
   description: string
   price: number
-  seller_name: string
   seller_phone: string
   condition: 'new' | 'like_new' | 'good' | 'fair' | 'poor'
   location: string
@@ -21,7 +20,6 @@ export interface CreateFurniture {
   title: string
   description: string
   price: number
-  seller_name: string
   seller_phone: string
   condition: 'new' | 'like_new' | 'good' | 'fair' | 'poor'
   location: string

@@ -99,7 +99,7 @@ CREATE TABLE furniture (
   price INTEGER NOT NULL,
   category_id UUID REFERENCES categories(id),
   seller_id UUID REFERENCES users(id), -- nullable (비회원 등록 가능)
-  seller_name TEXT, -- 비회원 판매자 이름
+
   seller_phone TEXT, -- 비회원 연락처
   condition TEXT CHECK (condition IN ('new', 'like_new', 'good', 'fair', 'poor')),
   location TEXT NOT NULL,

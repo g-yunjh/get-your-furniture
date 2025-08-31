@@ -148,7 +148,7 @@
                         : 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
                     ]"
                   >
-                    인사렙
+                    인사캠
                   </button>
                   <button
                     @click="form.location = 'jagwa'"
@@ -198,18 +198,7 @@
                 />
               </div>
 
-              <!-- 판매자 이름 -->
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  판매자 이름
-                </label>
-                <input
-                  v-model="form.seller_name"
-                  type="text"
-                  class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                  placeholder="판매자 이름 (선택사항)"
-                />
-              </div>
+
 
               <!-- 비밀번호 -->
               <div>
@@ -231,13 +220,13 @@
               <!-- 채팅 링크 -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  채팅 링크 (선택사항)
+                  카카오톡 오픈채팅방 링크 (선택사항)
                 </label>
                 <input
                   v-model="form.chat_link"
                   type="url"
                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                  placeholder="카카오톡 오픈채팅방 링크 등"
+                  placeholder="구매자와의 소통을 위한 채팅방 링크를 입력해주세요"
                 />
               </div>
             </div>
@@ -283,7 +272,6 @@ const form = ref<CreateFurniture>({
   condition: 'good',
   location: 'insa',
   images: [],
-  seller_name: '',
   seller_phone: '',
   password: '',
   chat_link: ''

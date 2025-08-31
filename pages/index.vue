@@ -88,31 +88,7 @@
             </svg>
           </div>
 
-          <!-- 지역 필터 -->
-          <div class="flex flex-wrap gap-3 justify-center">
-            <button 
-              @click="selectLocation('insa')"
-              :class="[
-                'px-6 py-3 rounded-xl font-semibold transition-all duration-300',
-                selectedLocation === 'insa' 
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
-                  : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
-              ]"
-            >
-              인사동
-            </button>
-            <button 
-              @click="selectLocation('jagwa')"
-              :class="[
-                'px-6 py-3 rounded-xl font-semibold transition-all duration-300',
-                selectedLocation === 'jagwa' 
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg' 
-                  : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30'
-              ]"
-            >
-              자과촌
-            </button>
-          </div>
+
         </div>
       </div>
 

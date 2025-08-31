@@ -128,7 +128,7 @@
                   type="text"
                   required
                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                  placeholder="예: 강남구, 서초구"
+                  placeholder="예: 명륜, 율전"
                 />
               </div>
             </div>
@@ -204,18 +204,7 @@
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">연락처 정보</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- 판매자 이름 -->
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  판매자 이름
-                </label>
-                <input
-                  v-model="form.seller_name"
-                  type="text"
-                  class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                  placeholder="판매자 이름"
-                />
-              </div>
+
 
               <!-- 연락처 -->
               <div>
@@ -307,7 +296,6 @@ const form = ref<CreateFurniture>({
   condition: 'good',
   location: '',
   images: [],
-  seller_name: '',
   seller_phone: '',
   chat_link: ''
 })
@@ -359,7 +347,6 @@ const loadFurniture = async () => {
       condition: data.condition,
       location: data.location,
       images: data.images || [],
-      seller_name: data.seller_name || '',
       seller_phone: data.seller_phone || '',
       chat_link: data.chat_link || ''
     }

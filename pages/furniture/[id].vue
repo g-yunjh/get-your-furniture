@@ -109,34 +109,20 @@
             <p class="whitespace-pre-wrap">{{ furniture.description }}</p>
           </div>
 
-          <!-- 채팅 버튼 -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-            <button
-              v-if="furniture.chat_link"
-              @click="openChat"
-              class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors"
-            >
-              채팅 보내기
-            </button>
-            <button
-              v-else
-              @click="showContactModal = true"
-              class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors"
-            >
-              연락하기
-            </button>
-          </div>
+                     <!-- 연락하기 버튼 -->
+           <div v-if="furniture.chat_link" class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+             <button
+               @click="openChat"
+               class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors"
+             >
+               연락하기
+             </button>
+           </div>
 
           <!-- 판매자 정보 -->
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">판매자 정보</h3>
             <div class="space-y-2">
-              <p class="text-gray-700 dark:text-gray-300">
-                <span class="font-medium">이름:</span> {{ furniture.seller_name }}
-              </p>
-              <p class="text-gray-700 dark:text-gray-300">
-                <span class="font-medium">연락처:</span> {{ furniture.seller_phone }}
-              </p>
               <p class="text-gray-700 dark:text-gray-300">
                 <span class="font-medium">위치:</span> {{ getLocationText(furniture.location) }}
               </p>
@@ -197,41 +183,7 @@
       </div>
     </div>
 
-    <!-- 연락처 입력 모달 -->
-    <div v-if="showContactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">연락처 정보</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
-          판매자와 연락하기 위해 연락처 정보를 입력해주세요.
-        </p>
-        <input
-          v-model="contactInfo.name"
-          type="text"
-          placeholder="이름"
-          class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white mb-3"
-        />
-        <input
-          v-model="contactInfo.phone"
-          type="tel"
-          placeholder="전화번호"
-          class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white mb-4"
-        />
-        <div class="flex space-x-3">
-          <button
-            @click="submitContact"
-            class="flex-1 bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            연락하기
-          </button>
-          <button
-            @click="showContactModal = false"
-            class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-white py-2 px-4 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors"
-          >
-            취소
-          </button>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -250,13 +202,8 @@ const currentImageIndex = ref(0)
 
 // 모달 상태
 const showPasswordModal = ref(false)
-const showContactModal = ref(false)
 const passwordModalType = ref<'edit' | 'delete'>('edit')
 const password = ref('')
-const contactInfo = ref({
-  name: '',
-  phone: ''
-})
 
 // 현재 이미지
 const currentImage = computed(() => {
@@ -311,7 +258,11 @@ const getConditionText = (condition: string) => {
 
 // 위치 텍스트
 const getLocationText = (location: string) => {
-  return location || '위치 미상'
+  const locations = {
+    insa: '명륜',
+    jagwa: '율전'
+  }
+  return locations[location as keyof typeof locations] || location || '위치 미상'
 }
 
 // 채팅 열기
@@ -352,18 +303,7 @@ const confirmPasswordAction = async () => {
   }
 }
 
-// 연락처 제출
-const submitContact = () => {
-  if (!contactInfo.value.name || !contactInfo.value.phone) {
-    alert('이름과 전화번호를 모두 입력해주세요.')
-    return
-  }
-  
-  // 여기에 연락처 처리 로직 추가
-  alert('연락처가 전송되었습니다.')
-  showContactModal.value = false
-  contactInfo.value = { name: '', phone: '' }
-}
+
 
 // 수정/삭제 모달 열기 함수들
 const handleEditClick = () => {
