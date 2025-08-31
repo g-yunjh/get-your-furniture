@@ -291,14 +291,21 @@ const confirmPasswordAction = async () => {
   try {
     if (passwordModalType.value === 'edit') {
       // 수정 페이지로 이동 (비밀번호를 쿼리 파라미터로 전달)
-      await router.push(`/furniture/${furniture.value.id}/edit?password=${encodeURIComponent(password.value)}`)
+      const url = `/furniture/${furniture.value.id}/edit?password=${encodeURIComponent(password.value)}`
+      console.log('수정 페이지로 이동:', url)
+      
+      // 모달을 먼저 닫고 강제 페이지 이동
+      closePasswordModal()
+      
+      // 강제 페이지 이동
+      window.location.href = url
     } else {
       // 삭제 실행
       await furnitureStore.deleteFurnitureWithPassword(furniture.value.id, password.value)
       await router.push('/')
     }
-    closePasswordModal()
   } catch (err: any) {
+    console.error('비밀번호 확인 액션 오류:', err)
     alert(err.message || '오류가 발생했습니다.')
   }
 }

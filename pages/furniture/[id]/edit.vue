@@ -1,5 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- 클라이언트 사이드에서만 렌더링 -->
+    <ClientOnly>
     <!-- 로딩 상태 -->
     <div v-if="loading" class="flex items-center justify-center min-h-screen">
       <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
@@ -183,11 +185,11 @@
                 @change="handleImageUpload"
                 class="hidden"
               />
-              <button
-                @click="$refs.fileInput.click()"
-                type="button"
-                class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-              >
+                             <button
+                 @click="() => { const input = $refs.fileInput as HTMLInputElement; input?.click(); }"
+                 type="button"
+                 class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+               >
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
@@ -270,10 +272,16 @@
         </form>
       </div>
     </div>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
+// SSR 비활성화
+definePageMeta({
+  ssr: false
+})
+
 import type { Furniture, CreateFurniture } from '~/types'
 
 const route = useRoute()
@@ -297,7 +305,9 @@ const form = ref<CreateFurniture>({
   location: '',
   images: [],
   seller_phone: '',
-  chat_link: ''
+  password: '',
+  chat_link: '',
+  is_sold: false
 })
 
 // 카테고리 데이터
@@ -316,17 +326,29 @@ const verifyPassword = async () => {
   }
 
   try {
-    const id = route.params.id as string
+    const id = route?.params?.id as string
+    if (!id) {
+      alert('상품 ID를 찾을 수 없습니다.')
+      return
+    }
+    
+    console.log('비밀번호 검증 시작:', { id, password: password.value })
+    
     const isValid = await furnitureStore.verifyPassword(id, password.value)
+    console.log('비밀번호 검증 결과:', isValid)
     
     if (isValid) {
       passwordVerified.value = true
+      console.log('비밀번호 검증 성공, 데이터 로드 시작')
       await loadFurniture()
     } else {
       alert('비밀번호가 일치하지 않습니다.')
+      password.value = ''
     }
   } catch (err: any) {
+    console.error('비밀번호 검증 오류:', err)
     alert(err.message || '오류가 발생했습니다.')
+    password.value = ''
   }
 }
 
@@ -335,8 +357,15 @@ const loadFurniture = async () => {
   try {
     loading.value = true
     error.value = null
-    const id = route.params.id as string
+    const id = route?.params?.id as string
+    if (!id) {
+      throw new Error('상품 ID를 찾을 수 없습니다.')
+    }
+    
+    console.log('가구 데이터 로드 시작:', id)
+    
     const data = await furnitureStore.getFurnitureById(id)
+    console.log('가구 데이터 로드 완료:', data)
     furniture.value = data
     
     // 폼 데이터 초기화
@@ -348,9 +377,13 @@ const loadFurniture = async () => {
       location: data.location,
       images: data.images || [],
       seller_phone: data.seller_phone || '',
-      chat_link: data.chat_link || ''
+      password: '', // 비밀번호는 폼에서 입력받지 않음
+      chat_link: data.chat_link || '',
+      is_sold: data.is_sold || false
     }
+    console.log('폼 데이터 초기화 완료:', form.value)
   } catch (err: any) {
+    console.error('가구 데이터 로드 오류:', err)
     error.value = err.message || '제품을 불러오는데 실패했습니다.'
   } finally {
     loading.value = false
@@ -396,8 +429,13 @@ const handleSubmit = async () => {
   try {
     submitting.value = true
     
-    const id = route.params.id as string
-    const storedPassword = route.query.password as string
+    const id = route?.params?.id as string
+    const storedPassword = route?.query?.password as string
+    
+    if (!id) {
+      alert('상품 ID를 찾을 수 없습니다.')
+      return
+    }
     
     if (!storedPassword) {
       alert('비밀번호가 필요합니다.')
@@ -406,6 +444,7 @@ const handleSubmit = async () => {
     
     await furnitureStore.updateFurnitureWithPassword(id, storedPassword, {
       ...form.value,
+      password: storedPassword, // 쿼리 파라미터에서 받은 비밀번호 사용
       updated_at: new Date().toISOString()
     })
     
@@ -420,12 +459,30 @@ const handleSubmit = async () => {
 
 // 페이지 로드 시 비밀번호 확인
 onMounted(async () => {
-  const storedPassword = route.query.password as string
+  console.log('edit 페이지 로드됨')
+  
+  // route 객체가 초기화될 때까지 대기
+  await nextTick()
+  
+  const storedPassword = route?.query?.password as string
+  console.log('쿼리 파라미터에서 비밀번호 확인:', storedPassword ? '있음' : '없음')
+  
   if (storedPassword) {
     password.value = storedPassword
+    console.log('비밀번호 설정됨, 검증 시작')
     await verifyPassword()
   } else {
+    console.log('비밀번호 없음, 로딩 상태 해제')
     loading.value = false
+  }
+})
+
+// 라우트 변경 감지
+watch(() => route?.query?.password, async (newPassword) => {
+  if (newPassword && !passwordVerified.value) {
+    console.log('라우트 변경 감지, 비밀번호 재검증')
+    password.value = newPassword as string
+    await verifyPassword()
   }
 })
 </script>

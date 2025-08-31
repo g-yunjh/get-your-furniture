@@ -84,7 +84,7 @@ export default defineNuxtConfig({
 
   // 색상 모드 설정
   colorMode: {
-    preference: 'system',
+    preference: 'light',
     fallback: 'light'
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero (aligned with FAQ page) -->
     <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
       <div class="relative z-10 text-center max-w-3xl px-6 py-16">
@@ -16,34 +16,34 @@
 
     <!-- Features -->
     <section class="max-w-7xl mx-auto px-6 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-10">왜 가져가구인가요?</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">왜 가져가구인가요?</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-observe class="card p-5 text-center transition-transform duration-300 hover:-translate-y-1">
           <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white flex items-center justify-center text-2xl">📦</div>
-          <h3 class="text-base font-semibold text-gray-900 mb-1.5">간편한 등록</h3>
-          <p class="text-gray-600 leading-relaxed mx-auto max-w-[28ch] break-keep">복잡한 과정 없이 쓰지 않는 가구를 간단히 등록할 수 있습니다.</p>
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1.5">간편한 등록</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mx-auto max-w-[28ch] break-keep">복잡한 과정 없이 쓰지 않는 가구를 간단히 등록할 수 있습니다.</p>
         </div>
         <div v-observe class="card p-5 text-center transition-transform duration-300 hover:-translate-y-1">
           <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white flex items-center justify-center text-2xl">🚚</div>
-          <h3 class="text-base font-semibold text-gray-900 mb-1.5">배송 서비스</h3>
-          <p class="text-gray-600 leading-relaxed mx-auto max-w-[28ch] break-keep">무겁고 번거로운 운반은 저희가 책임집니다. 걱정 없이 거래하세요.</p>
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1.5">배송 서비스</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mx-auto max-w-[28ch] break-keep">무겁고 번거로운 운반은 저희가 책임집니다. 걱정 없이 거래하세요.</p>
         </div>
         <div v-observe class="card p-5 text-center transition-transform duration-300 hover:-translate-y-1">
           <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white flex items-center justify-center text-2xl">♻️</div>
-          <h3 class="text-base font-semibold text-gray-900 mb-1.5">지속가능한 순환</h3>
-          <p class="text-gray-600 leading-relaxed mx-auto max-w-[28ch] break-keep">아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다.</p>
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1.5">지속가능한 순환</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mx-auto max-w-[28ch] break-keep">아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다.</p>
         </div>
       </div>
 
-      <div v-observe class="mt-10 bg-white rounded-2xl border border-gray-200 shadow-md p-6 text-center">
-        <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto">
+      <div v-observe class="mt-10 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 text-center">
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
           <span class="text-primary-700 font-semibold">가져가구</span>는 중고 가구 거래와 배송을 한 번에 해결하는 중고 가구 순환 플랫폼입니다<br><br>
           저희는 복잡한 중고 거래 과정을 간소화하고, 아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다<br><br>
           더 나은 환경을 위해, 더 편리한 거래를 위해 가져가구가 함께합니다
         </p>
       </div>
 
-      <p v-observe class="text-center text-lg sm:text-xl font-bold text-gray-900 mt-10">가구는 무겁지만, 거래는 가볍게!</p>
+      <p v-observe class="text-center text-lg sm:text-xl font-bold text-gray-900 dark:text-white mt-10">가구는 무겁지만, 거래는 가볍게!</p>
     </section>
 
     <!-- Final CTA -->

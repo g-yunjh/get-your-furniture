@@ -26,6 +26,7 @@ export interface CreateFurniture {
   images: string[]
   password: string
   chat_link?: string
+  is_sold?: boolean
 }
 
 // 가구 상품 업데이트 타입

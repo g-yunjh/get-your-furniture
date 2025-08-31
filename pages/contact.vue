@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero Section -->
     <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
       <div class="relative z-10 text-center max-w-3xl px-6 py-16">
@@ -15,11 +15,11 @@
 
     <!-- Contact Form -->
     <section class="max-w-2xl mx-auto px-6 py-16">
-      <div class="bg-white rounded-2xl shadow-lg p-8">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
         <form @submit.prevent="submitForm" class="space-y-6">
           <!-- 이름 -->
           <div>
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               성함
             </label>
             <input
@@ -28,13 +28,13 @@
               type="text"
               required
               placeholder="고객님의 이름을 알려주세요."
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
             />
           </div>
 
           <!-- 이메일 -->
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               답변 받을 이메일 주소
             </label>
             <input
@@ -43,13 +43,13 @@
               type="email"
               required
               placeholder="저희가 답변 드릴 이메일 주소를 알려주세요."
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
             />
           </div>
 
           <!-- 문의 내용 -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               문의 내용
             </label>
             <div class="space-y-3">
@@ -58,21 +58,21 @@
                 type="text"
                 required
                 placeholder="제목을 입력해주세요."
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
               />
               <textarea
                 v-model="form.message"
                 required
                 rows="6"
                 placeholder="불편을 겪으신 부분에 대해 이야기 해주세요."
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors resize-none"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors resize-none"
               ></textarea>
             </div>
           </div>
 
           <!-- 첨부파일 -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               첨부파일
             </label>
             <div class="relative">
@@ -87,12 +87,12 @@
               <button
                 type="button"
                 @click="() => fileInput?.click()"
-                class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-colors flex items-center justify-center space-x-2"
+                class="w-full px-4 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors flex items-center justify-center space-x-2"
               >
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
                 </svg>
-                <span class="text-gray-600">파일을 등록해주세요.</span>
+                <span class="text-gray-600 dark:text-gray-400">파일을 등록해주세요.</span>
               </button>
             </div>
             

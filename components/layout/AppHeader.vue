@@ -20,8 +20,43 @@
           <NuxtLink to="/contact" class="text-white/90 hover:text-white transition-colors font-semibold drop-shadow-sm" active-class="text-white font-bold">문의하기</NuxtLink>
         </nav>
 
-        <!-- 우측 여백 (기존 사용자 메뉴 공간) -->
-        <div class="w-24"></div>
+        <!-- 다크모드 토글 버튼 -->
+        <button
+          @click="toggleColorMode"
+          class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
+          :title="colorMode.value === 'dark' ? '라이트모드로 전환' : '다크모드로 전환'"
+        >
+          <!-- 라이트모드 아이콘 (다크모드일 때 표시) -->
+          <svg
+            v-if="colorMode.value === 'dark'"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          <!-- 다크모드 아이콘 (라이트모드일 때 표시) -->
+          <svg
+            v-else
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -29,5 +64,9 @@
 </template>
 
 <script setup lang="ts">
-// 인증 관련 코드 제거됨
+const colorMode = useColorMode()
+
+const toggleColorMode = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 </script>

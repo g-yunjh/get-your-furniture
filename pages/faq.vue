@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero -->
     <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
       <div class="relative z-10 text-center max-w-3xl px-6 py-16">
@@ -13,7 +13,7 @@
     <!-- FAQ Content -->
     <section class="max-w-4xl mx-auto px-6 py-12">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-900">무엇을 도와드릴까요?</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">무엇을 도와드릴까요?</h2>
         <div class="flex gap-2">
           <button class="btn-secondary" @click="collapseAll">모두 닫기</button>
           <button class="btn-primary" @click="expandAll">모두 열기</button>
@@ -22,7 +22,7 @@
 
       <div class="space-y-8">
         <div v-for="(section, sIdx) in sections" :key="section.title">
-          <h3 class="text-lg sm:text-xl font-extrabold text-gray-900 mb-3 flex items-center gap-2">
+          <h3 class="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
             <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-sm font-black">{{ sIdx + 1 }}</span>
             {{ section.title }}
           </h3>
@@ -39,11 +39,11 @@
                 :aria-expanded="isOpen(sIdx, iIdx)"
               >
                 <div class="pr-4">
-                  <p class="text-gray-900 font-semibold">{{ item.q }}</p>
-                  <p v-if="isOpen(sIdx, iIdx)" class="mt-2 text-gray-600 leading-relaxed">{{ item.a }}</p>
+                  <p class="text-gray-900 dark:text-white font-semibold">{{ item.q }}</p>
+                  <p v-if="isOpen(sIdx, iIdx)" class="mt-2 text-gray-600 dark:text-gray-400 leading-relaxed">{{ item.a }}</p>
                 </div>
                 <span
-                  class="ml-4 mt-1 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gray-100 text-gray-600 group-hover:bg-gray-200"
+                  class="ml-4 mt-1 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-600"
                 >
                   <svg v-if="!isOpen(sIdx, iIdx)" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
