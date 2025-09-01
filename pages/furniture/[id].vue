@@ -109,7 +109,17 @@
             <p class="whitespace-pre-wrap">{{ furniture.description }}</p>
           </div>
 
-                     <!-- 연락하기 버튼 -->
+                     <!-- 구매하기 버튼 -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <button
+              @click="openPurchaseChat"
+              class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-600 transition-colors"
+            >
+              구매하기
+            </button>
+          </div>
+
+          <!-- 연락하기 버튼 -->
            <div v-if="furniture.chat_link" class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
              <button
                @click="openChat"
@@ -263,6 +273,11 @@ const getLocationText = (location: string) => {
     jagwa: '율전'
   }
   return locations[location as keyof typeof locations] || location || '위치 미상'
+}
+
+// 구매하기 채팅 열기
+const openPurchaseChat = () => {
+  window.open('https://open.kakao.com/o/sVLv7lMh', '_blank')
 }
 
 // 채팅 열기
