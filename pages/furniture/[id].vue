@@ -17,23 +17,23 @@
     </div>
 
     <!-- 제품 상세 내용 -->
-    <div v-else-if="furniture" class="container mx-auto px-4 py-8">
+    <div v-else-if="furniture" class="container mx-auto px-4 py-2 sm:py-8">
       <!-- 뒤로가기 버튼 -->
-      <div class="mb-6">
+      <div class="mb-1 sm:mb-6">
         <button @click="$router.back()" class="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
           </svg>
-          뒤로가기
+          <span class="text-sm sm:text-base">뒤로가기</span>
         </button>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- 왼쪽: 이미지 섹션 -->
-        <div class="lg:col-span-2">
+             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         <!-- 왼쪽: 이미지 섹션 -->
+         <div class="lg:col-span-2">
           <!-- 이미지 캐러셀 -->
           <div class="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-            <div class="relative aspect-square">
+                         <div class="relative aspect-[3/2] sm:aspect-[3/2] lg:aspect-[4/3]">
               <img
                 v-if="furniture.images && furniture.images.length > 0"
                 :src="currentImage"
@@ -91,17 +91,30 @@
 
         <!-- 오른쪽: 제품 정보 섹션 -->
         <div class="space-y-4">
-          <div class="flex items-center justify-between">
+          <div class="space-y-3">
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ furniture.title }}</h1>
-            <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ formatPrice(furniture.price) }}원</span>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ formatPrice(furniture.price) }}원</span>
+              <button
+                @click="openPurchaseChat"
+                class="bg-orange-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-orange-600 transition-colors"
+              >
+                구매하기
+              </button>
+            </div>
           </div>
           
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-              {{ getConditionText(furniture.condition) }}
-            </span>
-            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-              {{ getLocationText(furniture.location) }}
+          <div class="flex items-center justify-between">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
+                {{ getConditionText(furniture.condition) }}
+              </span>
+              <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-400 rounded-full text-sm">
+                {{ getLocationText(furniture.location) }}
+              </span>
+            </div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">
+              등록일: {{ formatTimeAgo(furniture.created_at) }}
             </span>
           </div>
           
@@ -109,38 +122,24 @@
             <p class="whitespace-pre-wrap">{{ furniture.description }}</p>
           </div>
 
-                     <!-- 구매하기 버튼 -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-            <button
-              @click="openPurchaseChat"
-              class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-600 transition-colors"
-            >
-              구매하기
-            </button>
-          </div>
+
 
           <!-- 연락하기 버튼 -->
            <div v-if="furniture.chat_link" class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">판매자와 연락하기</h3>
              <button
                @click="openChat"
-               class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors"
+               class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors mb-4"
              >
                연락하기
              </button>
+             <ul class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed list-disc pl-5 space-y-1">
+               <li>이 연락처는 가구에 대한 질문을 하기 위한 채팅입니다.</li>
+               <li>개별적으로 송금을 요구하는 경우가 있더라도 절대 송금하지 마세요.</li>
+             </ul>
            </div>
 
-          <!-- 판매자 정보 -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">판매자 정보</h3>
-            <div class="space-y-2">
-              <p class="text-gray-700 dark:text-gray-300">
-                <span class="font-medium">위치:</span> {{ getLocationText(furniture.location) }}
-              </p>
-              <p class="text-gray-700 dark:text-gray-300">
-                <span class="font-medium">등록일:</span> {{ formatTimeAgo(furniture.created_at) }}
-              </p>
-            </div>
-          </div>
+
 
           <!-- 삭제 버튼 (비밀번호 기반) -->
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">

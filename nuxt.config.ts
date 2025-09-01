@@ -21,13 +21,16 @@ export default defineNuxtConfig({
   },
 
   // 앱 설정
-  app: {
+        app: {
     head: {
       title: '가져가구 - 중고가구 거래 플랫폼',
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: '안전하고 편리한 중고가구 거래 플랫폼' }
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
+        { name: 'description', content: '안전하고 편리한 중고가구 거래 플랫폼' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -39,7 +42,7 @@ export default defineNuxtConfig({
   },
 
   // CSS 설정
-  css: [],
+  css: ['~/assets/css/main.css'],
 
   // Tailwind CSS 설정
   tailwindcss: {
@@ -71,6 +74,29 @@ export default defineNuxtConfig({
               800: '#6b21a8',
               900: '#581c87'
             }
+          },
+          fontSize: {
+            'xs': ['0.75rem', { lineHeight: '1rem' }],
+            'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+            'base': ['1rem', { lineHeight: '1.5rem' }],
+            'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+            'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+            '2xl': ['1.5rem', { lineHeight: '2rem' }],
+            '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+            '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+            '5xl': ['3rem', { lineHeight: '1' }],
+            '6xl': ['3.75rem', { lineHeight: '1' }],
+            '7xl': ['4.5rem', { lineHeight: '1' }],
+            '8xl': ['6rem', { lineHeight: '1' }],
+            '9xl': ['8rem', { lineHeight: '1' }],
+          },
+          screens: {
+            'xs': '475px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
           }
         }
       }

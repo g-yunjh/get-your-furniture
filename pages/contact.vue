@@ -3,10 +3,10 @@
     <!-- Hero Section -->
     <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white">
       <div class="relative z-10 text-center max-w-3xl px-6 py-16">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-2 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent drop-shadow">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-2 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent drop-shadow break-keep">
           가져가구에게 문의하기
         </h1>
-        <p class="text-white/90 leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
+        <p class="text-white/90 leading-relaxed text-sm sm:text-base max-w-2xl mx-auto break-keep">
           궁금한 점이나 불편한 사항이 있으시면 언제든 문의해주세요<br>
           빠른 시일 내에 답변 드리겠습니다
         </p>
@@ -27,7 +27,7 @@
               v-model="form.name"
               type="text"
               required
-              placeholder="고객님의 이름을 알려주세요."
+              placeholder="고객님의 이름을 알려주세요"
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
             />
           </div>
@@ -42,7 +42,7 @@
               v-model="form.email"
               type="email"
               required
-              placeholder="저희가 답변 드릴 이메일 주소를 알려주세요."
+              placeholder="답변 받을 이메일 주소"
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
             />
           </div>
@@ -57,14 +57,14 @@
                 v-model="form.subject"
                 type="text"
                 required
-                placeholder="제목을 입력해주세요."
+                placeholder="문의 제목"
                 class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
               />
               <textarea
                 v-model="form.message"
                 required
                 rows="6"
-                placeholder="불편을 겪으신 부분에 대해 이야기 해주세요."
+                placeholder="문의 내용을 자세히 작성해주세요"
                 class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors resize-none"
               ></textarea>
             </div>
@@ -92,7 +92,7 @@
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
                 </svg>
-                <span class="text-gray-600 dark:text-gray-400">파일을 등록해주세요.</span>
+                <span class="text-gray-600 dark:text-gray-400">파일을 등록해주세요</span>
               </button>
             </div>
             

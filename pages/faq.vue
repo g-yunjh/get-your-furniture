@@ -12,9 +12,9 @@
 
     <!-- FAQ Content -->
     <section class="max-w-4xl mx-auto px-6 py-12">
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0 mb-6">
         <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">무엇을 도와드릴까요?</h2>
-        <div class="flex gap-2">
+        <div class="flex gap-2 self-end sm:self-auto">
           <button class="btn-secondary" @click="collapseAll">모두 닫기</button>
           <button class="btn-primary" @click="expandAll">모두 열기</button>
         </div>

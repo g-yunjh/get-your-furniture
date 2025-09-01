@@ -1,0 +1,200 @@
+/* 모바일 최적화를 위한 전역 스타일 */
+
+/* 기본 폰트 설정 */
+html {
+  font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* 모바일에서 터치 최적화 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 모바일에서 스크롤 부드럽게 */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* 모바일에서 스크롤 성능 최적화 */
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* 모바일에서 입력 필드 최적화 */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* iOS에서 줌 방지 */
+    -webkit-appearance: none;
+    border-radius: 0;
+    touch-action: manipulation;
+  }
+}
+
+/* 모바일에서 입력 필드 포커스 최적화 */
+@media (max-width: 768px) {
+  input:focus, textarea:focus, select:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+}
+
+/* 모바일에서 버튼 터치 영역 최적화 */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+}
+
+/* 모바일에서 터치 피드백 */
+@media (max-width: 768px) {
+  button:active, a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* 모바일에서 이미지 최적화 */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* 모바일에서 텍스트 선택 최적화 */
+::selection {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: inherit;
+}
+
+/* 모바일에서 스크롤바 숨기기 */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* 모바일에서 포커스 표시 */
+*:focus {
+  outline: 2px solid rgba(168, 85, 247, 0.5);
+  outline-offset: 2px;
+}
+
+/* 모바일에서 버튼 호버 효과 비활성화 */
+@media (hover: none) {
+  button:hover, a:hover {
+    transform: none !important;
+  }
+}
+
+/* 모바일에서 텍스트 크기 조정 방지 */
+body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* 모바일에서 Safe Area 지원 */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-area-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* 모바일에서 카드 그림자 최적화 */
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* 모바일에서 카드 호버 효과 */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+}
+
+/* 모바일에서 버튼 스타일 */
+.btn-primary {
+  @apply bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-purple-800 transition-all duration-200 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+}
+
+/* 모바일에서 카드 스타일 */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700;
+}
+
+/* 모바일에서 그라데이션 텍스트 */
+.gradient-text {
+  @apply bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 모바일에서 그라데이션 배경 최적화 */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+
+/* 모바일에서 애니메이션 최적화 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 모바일에서 성능 최적화 */
+* {
+  will-change: auto;
+}
+
+/* 모바일에서 하드웨어 가속 활성화 */
+.card, button, .gradient-bg {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 모바일에서 스크롤 성능 최적화 */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}

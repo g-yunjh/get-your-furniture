@@ -7,7 +7,7 @@
           가져가구
         </h1>
         <p class="text-lg sm:text-xl font-medium text-white/95 mb-3">중고 가구 순환 플랫폼</p>
-        <p class="text-white/90 leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
+        <p class="text-white/90 leading-relaxed text-sm sm:text-base max-w-2xl mx-auto break-keep">
           쓰지 않는 가구는 간단히 등록만 하세요<br>
           필요한 사람이 쉽게 찾아가고, 운반은 저희가 책임집니다
         </p>
@@ -36,7 +36,7 @@
       </div>
 
       <div v-observe class="mt-10 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 text-center">
-        <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto break-keep">
           <span class="text-primary-700 font-semibold">가져가구</span>는 중고 가구 거래와 배송을 한 번에 해결하는 중고 가구 순환 플랫폼입니다<br><br>
           저희는 복잡한 중고 거래 과정을 간소화하고, 아직 쓸 수 있는 가구들이 새로운 주인을 만나도록 돕습니다<br><br>
           더 나은 환경을 위해, 더 편리한 거래를 위해 가져가구가 함께합니다
