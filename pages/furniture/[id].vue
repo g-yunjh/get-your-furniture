@@ -142,16 +142,10 @@
             </div>
           </div>
 
-          <!-- 수정/삭제 버튼 (비밀번호 기반) -->
+          <!-- 삭제 버튼 (비밀번호 기반) -->
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">게시글 관리</h3>
             <div class="space-y-3">
-              <button
-                @click="handleEditClick"
-                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                수정하기
-              </button>
               <button
                 @click="handleDeleteClick"
                 class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
@@ -168,7 +162,7 @@
     <div v-if="showPasswordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          {{ passwordModalType === 'edit' ? '수정' : '삭제' }}을 위해 비밀번호를 입력하세요
+          삭제를 위해 비밀번호를 입력하세요
         </h3>
         <input
           v-model="password"
@@ -212,7 +206,6 @@ const currentImageIndex = ref(0)
 
 // 모달 상태
 const showPasswordModal = ref(false)
-const passwordModalType = ref<'edit' | 'delete'>('edit')
 const password = ref('')
 
 // 현재 이미지
@@ -288,8 +281,7 @@ const openChat = () => {
 }
 
 // 비밀번호 모달 열기
-const openPasswordModal = (type: 'edit' | 'delete') => {
-  passwordModalType.value = type
+const openPasswordModal = () => {
   showPasswordModal.value = true
 }
 
@@ -304,21 +296,9 @@ const confirmPasswordAction = async () => {
   if (!furniture.value || !password.value) return
 
   try {
-    if (passwordModalType.value === 'edit') {
-      // 수정 페이지로 이동 (비밀번호를 쿼리 파라미터로 전달)
-      const url = `/furniture/${furniture.value.id}/edit?password=${encodeURIComponent(password.value)}`
-      console.log('수정 페이지로 이동:', url)
-      
-      // 모달을 먼저 닫고 강제 페이지 이동
-      closePasswordModal()
-      
-      // 강제 페이지 이동
-      window.location.href = url
-    } else {
-      // 삭제 실행
-      await furnitureStore.deleteFurnitureWithPassword(furniture.value.id, password.value)
-      await router.push('/')
-    }
+    // 삭제 실행
+    await furnitureStore.deleteFurnitureWithPassword(furniture.value.id, password.value)
+    await router.push('/')
   } catch (err: any) {
     console.error('비밀번호 확인 액션 오류:', err)
     alert(err.message || '오류가 발생했습니다.')
@@ -327,13 +307,9 @@ const confirmPasswordAction = async () => {
 
 
 
-// 수정/삭제 모달 열기 함수들
-const handleEditClick = () => {
-  openPasswordModal('edit')
-}
-
+// 삭제 모달 열기 함수
 const handleDeleteClick = () => {
-  openPasswordModal('delete')
+  openPasswordModal()
 }
 
 // 데이터 로드

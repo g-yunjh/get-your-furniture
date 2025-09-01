@@ -144,8 +144,8 @@
                     :class="[
                       'flex-1 px-4 py-2 rounded-lg font-medium transition-colors',
                       form.location === 'insa' 
-                        ? 'bg-gray-800 dark:bg-gray-600 text-white' 
-                        : 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
+                        ? 'bg-purple-600 text-white' 
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                     ]"
                   >
                     인사캠
@@ -156,8 +156,8 @@
                     :class="[
                       'flex-1 px-4 py-2 rounded-lg font-medium transition-colors',
                       form.location === 'jagwa' 
-                        ? 'bg-gray-800 dark:bg-gray-600 text-white' 
-                        : 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
+                        ? 'bg-purple-600 text-white' 
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                     ]"
                   >
                     자과캠
