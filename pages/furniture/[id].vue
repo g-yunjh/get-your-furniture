@@ -33,7 +33,7 @@
          <div class="lg:col-span-2">
           <!-- 이미지 캐러셀 -->
           <div class="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                         <div class="relative aspect-[3/2] sm:aspect-[3/2] lg:aspect-[4/3]">
+                         <div ref="carouselRef" class="relative aspect-video sm:aspect-[3/2] lg:aspect-[4/3]" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
               <img
                 v-if="furniture.images && furniture.images.length > 0"
                 :src="currentImage"
@@ -81,7 +81,7 @@
                 :key="index"
                 @click="currentImageIndex = index"
                 :class="[
-                  'w-3 h-3 rounded-full transition-all',
+                  'no-touch-min w-[8px] h-[8px] sm:w-3 sm:h-3 rounded-full transition-all',
                   currentImageIndex === index ? 'bg-purple-600' : 'bg-gray-300 dark:bg-gray-600'
                 ]"
               ></button>
@@ -202,6 +202,10 @@ const furniture = ref<Furniture | null>(null)
 const loading = ref(true)
 const error = ref<string | null>(null)
 const currentImageIndex = ref(0)
+const carouselRef = ref<HTMLElement | null>(null)
+const touchStartX = ref(0)
+const touchCurrentX = ref(0)
+const hasSwiped = ref(false)
 
 // 모달 상태
 const showPasswordModal = ref(false)
@@ -224,6 +228,37 @@ const previousImage = () => {
   currentImageIndex.value = currentImageIndex.value === 0 
     ? furniture.value.images.length - 1 
     : currentImageIndex.value - 1
+}
+
+// 터치 스와이프 지원
+const onTouchStart = (e: TouchEvent) => {
+  if (!furniture.value?.images || furniture.value.images.length <= 1) return
+  const firstTouch = e.touches && e.touches.item(0)
+  if (!firstTouch) return
+  touchStartX.value = firstTouch.clientX
+  touchCurrentX.value = touchStartX.value
+  hasSwiped.value = false
+}
+
+const onTouchMove = (e: TouchEvent) => {
+  if (!furniture.value?.images || furniture.value.images.length <= 1) return
+  const firstTouch = e.touches && e.touches.item(0)
+  if (!firstTouch) return
+  touchCurrentX.value = firstTouch.clientX
+}
+
+const onTouchEnd = () => {
+  if (!furniture.value?.images || furniture.value.images.length <= 1) return
+  const deltaX = touchCurrentX.value - touchStartX.value
+  const threshold = 40
+  if (Math.abs(deltaX) > threshold && !hasSwiped.value) {
+    hasSwiped.value = true
+    if (deltaX < 0) {
+      nextImage()
+    } else {
+      previousImage()
+    }
+  }
 }
 
 // 가격 포맷팅

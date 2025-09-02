@@ -54,6 +54,14 @@ body {
   }
 }
 
+/* 작은 클릭 타겟이 필요한 요소(예: 캐러셀 dot)를 위한 예외 유틸리티 */
+@media (max-width: 768px) {
+  .no-touch-min {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+}
+
 /* 모바일에서 터치 피드백 */
 @media (max-width: 768px) {
   button:active, a:active {
