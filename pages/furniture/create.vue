@@ -110,6 +110,11 @@
                    class="w-full px-2 sm:px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-sm"
                    placeholder="0"
                  />
+                <div class="mt-2 text-xs text-red-500 space-y-1">
+                  <p>• 해당 가격은 구매자가 실제로 지불할 금액입니다.</p>
+                  <p>• 판매자가 받는 금액은 위 금액에서 배송 수수료를 제외한 금액입니다.</p>
+                  <p>• 배송 수수료는 가구 무게와 크기, 거리 등에 따라 달리 책정됩니다.</p>
+                </div>
                </div>
 
                <!-- 상태 -->
