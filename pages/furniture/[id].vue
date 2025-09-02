@@ -141,13 +141,19 @@
 
 
 
-          <!-- 삭제 버튼 (비밀번호 기반) -->
+          <!-- 수정/삭제 버튼 (비밀번호 기반) -->
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">게시글 관리</h3>
-            <div class="space-y-3">
+            <div class="flex gap-3">
+              <button
+                @click="handleEditClick"
+                class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                수정하기
+              </button>
               <button
                 @click="handleDeleteClick"
-                class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
               >
                 삭제하기
               </button>
@@ -161,7 +167,7 @@
     <div v-if="showPasswordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          삭제를 위해 비밀번호를 입력하세요
+          {{ passwordMode === 'delete' ? '삭제를 위해 비밀번호를 입력하세요' : '수정을 위해 비밀번호를 입력하세요' }}
         </h3>
         <input
           v-model="password"
@@ -210,6 +216,7 @@ const hasSwiped = ref(false)
 // 모달 상태
 const showPasswordModal = ref(false)
 const password = ref('')
+const passwordMode = ref<'delete' | 'edit'>('delete')
 
 // 현재 이미지
 const currentImage = computed(() => {
@@ -330,9 +337,22 @@ const confirmPasswordAction = async () => {
   if (!furniture.value || !password.value) return
 
   try {
-    // 삭제 실행
-    await furnitureStore.deleteFurnitureWithPassword(furniture.value.id, password.value)
-    await router.push('/')
+    if (passwordMode.value === 'delete') {
+      await furnitureStore.deleteFurnitureWithPassword(furniture.value.id, password.value)
+      await router.push('/')
+    } else {
+      // 비밀번호 검증 후 수정 페이지로 이동
+      const isValid = await furnitureStore.verifyPassword(furniture.value.id, password.value)
+      if (!isValid) {
+        alert('비밀번호가 일치하지 않습니다.')
+        return
+      }
+      // 비밀번호를 임시 저장 (세션 범위)
+      if (process.client) {
+        sessionStorage.setItem(`edit_pw_${furniture.value.id}`, password.value)
+      }
+      await router.push(`/furniture/edit/${furniture.value.id}`)
+    }
   } catch (err: any) {
     console.error('비밀번호 확인 액션 오류:', err)
     alert(err.message || '오류가 발생했습니다.')
@@ -343,6 +363,13 @@ const confirmPasswordAction = async () => {
 
 // 삭제 모달 열기 함수
 const handleDeleteClick = () => {
+  passwordMode.value = 'delete'
+  openPasswordModal()
+}
+
+// 수정 모달 열기 함수
+const handleEditClick = () => {
+  passwordMode.value = 'edit'
   openPasswordModal()
 }
 

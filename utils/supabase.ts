@@ -1,13 +1,22 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '~/types/supabase'
 
-// Supabase 클라이언트를 생성하는 함수
+// Supabase 클라이언트 싱글톤 반환 함수
 export const createSupabaseClient = () => {
+  const g = globalThis as unknown as { __gyf_supabase?: SupabaseClient<Database> }
+  if (g.__gyf_supabase) return g.__gyf_supabase
   const config = useRuntimeConfig()
-  return createClient<Database>(
+  g.__gyf_supabase = createClient<Database>(
     config.public.supabaseUrl,
-    config.public.supabaseKey
+    config.public.supabaseKey,
+    {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false
+      }
+    }
   )
+  return g.__gyf_supabase
 }
 
 // 가구 관련 유틸리티
