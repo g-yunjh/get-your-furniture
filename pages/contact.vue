@@ -10,6 +10,14 @@
           궁금한 점이나 불편한 사항이 있으시면 언제든 문의해주세요<br>
           빠른 시일 내에 답변 드리겠습니다
         </p>
+        <div class="mt-4 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+          <p class="text-white/90 text-sm leading-relaxed break-keep">
+                         <span class="font-semibold text-yellow-300">⚠️ 주의사항:</span><br>
+             이 문의하기는 답변까지 약간의 시간이 걸릴 수 있습니다.<br>
+             <span class="font-semibold text-yellow-300">긴급한 문의사항</span>이 있으시면<br>
+             페이지 맨 아래에 있는 대표 전화 <span class="font-bold text-yellow-300">010-4170-8451</span>로 연락해주세요.
+          </p>
+        </div>
       </div>
     </section>
 
