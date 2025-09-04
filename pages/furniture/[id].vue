@@ -203,6 +203,11 @@ const route = useRoute()
 const router = useRouter()
 const furnitureStore = useFurnitureStore()
 
+// 페이지 타이틀
+useHead({
+  title: '상세 보기'
+})
+
 // 상태 관리
 const furniture = ref<Furniture | null>(null)
 const loading = ref(true)

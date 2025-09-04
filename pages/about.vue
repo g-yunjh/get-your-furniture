@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: '서비스 소개 - 가져가구',
+  title: '서비스 소개',
   meta: [
     { name: 'description', content: '중고 가구 순환 플랫폼 가져가구 서비스 소개' }
   ]

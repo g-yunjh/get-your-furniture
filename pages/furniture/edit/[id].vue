@@ -118,6 +118,11 @@ const route = useRoute()
 const router = useRouter()
 const furnitureStore = useFurnitureStore()
 
+// 페이지 타이틀
+useHead({
+  title: '수정하기'
+})
+
 const submitting = ref(false)
 
 const goBack = () => {

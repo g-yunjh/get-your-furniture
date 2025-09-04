@@ -120,7 +120,7 @@ const collapseAll = () => {
 }
 
 useHead({
-  title: 'FAQ | 가져가구',
+  title: 'FAQ',
   meta: [
     { name: 'description', content: '가져가구 자주 묻는 질문과 답변' },
   ],

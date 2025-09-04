@@ -152,7 +152,7 @@
 import { contact, storage } from '~/utils/supabase'
 
 useHead({
-  title: '문의하기 - 가져가구',
+  title: '문의하기',
   meta: [
     { name: 'description', content: '가져가구에 문의하세요. 궁금한 점이나 불편한 사항을 알려주시면 빠른 시일 내에 답변 드리겠습니다.' }
   ]

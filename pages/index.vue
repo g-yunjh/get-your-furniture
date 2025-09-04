@@ -211,7 +211,7 @@
 <script setup lang="ts">
 // SEO 설정
 useHead({
-  title: '가져가구 - 중고가구 거래 플랫폼',
+  title: '홈',
   meta: [
     { name: 'description', content: '필요한 것만, 가져가구. 안전하고 편리한 중고가구 거래 플랫폼입니다.' }
   ]

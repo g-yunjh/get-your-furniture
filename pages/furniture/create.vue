@@ -265,6 +265,10 @@ import type { CreateFurniture } from '~/types'
 
 const router = useRouter()
 const furnitureStore = useFurnitureStore()
+// 페이지 타이틀
+useHead({
+  title: '등록하기'
+})
 
 // 상태 관리
 const submitting = ref(false)
