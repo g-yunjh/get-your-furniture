@@ -5,10 +5,10 @@
         <div class="flex justify-between items-center h-16">
           <!-- 로고 -->
           <NuxtLink to="/" class="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-              <img src="/logo.svg" alt="가져가구 로고" class="w-5 h-5 sm:w-6 sm:h-6 brightness-0 invert" />
+            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center shadow-xl shadow-purple-500/20 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300">
+              <img src="/logo.svg" alt="가져가구 로고" class="w-5 h-5 sm:w-6 sm:h-6" style="filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(2000%) hue-rotate(270deg) brightness(100%) contrast(100%);" />
             </div>
-            <span class="text-lg sm:text-xl font-black bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">가져가구</span>
+            <span class="text-lg sm:text-xl font-black text-white">가져가구</span>
           </NuxtLink>
 
           <!-- 데스크탑 네비게이션 -->
