@@ -47,7 +47,7 @@
               </div>
 
               <!-- 이미지 네비게이션 -->
-              <div v-if="furniture.images && furniture.images.length > 1" class="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+              <div v-if="furniture.images && furniture.images.length > 1 && !showImageModal" class="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
                 <button
                   @click.stop="previousImage"
                   class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all pointer-events-auto"
@@ -401,12 +401,12 @@ const closeImageModal = () => {
   showImageModal.value = false
 }
 
-// 모달에서 이미지 인덱스 업데이트
+// 모달에서 이미지 인덱스 업데이트 (모달이 닫힐 때만 호출됨)
 const updateModalImageIndex = (index: number) => {
-  // 모달이 열려있는 동안에는 메인 페이지의 이미지도 함께 변경
-  // 이렇게 하면 모달과 메인 페이지가 동기화됨
+  // 모달이 닫힐 때만 메인 페이지의 이미지 인덱스를 업데이트
   currentImageIndex.value = index
 }
+
 
 
 // 데이터 로드

@@ -25,7 +25,7 @@
       <template v-if="images && images.length > 1">
         <!-- 이전 버튼 -->
         <button
-          @click="previousImage"
+          @click.stop="previousImage"
           class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 transition-all"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@
 
         <!-- 다음 버튼 -->
         <button
-          @click="nextImage"
+          @click.stop="nextImage"
           class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 transition-all"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,18 +43,6 @@
           </svg>
         </button>
 
-        <!-- 이미지 인디케이터 -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <button
-            v-for="(image, index) in images"
-            :key="index"
-            @click="setImageIndex(index)"
-            :class="[
-              'w-3 h-3 rounded-full transition-all',
-              currentImageIndex === index ? 'bg-white' : 'bg-white bg-opacity-50'
-            ]"
-          ></button>
-        </div>
 
         <!-- 이미지 카운터 -->
         <div class="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
@@ -93,11 +81,10 @@ const currentImage = computed(() => {
   return props.images[currentImageIndex.value]
 })
 
-// 이미지 네비게이션
+// 이미지 네비게이션 (모달 내에서만 변경, 부모에게 알리지 않음)
 const nextImage = () => {
   if (!props.images || props.images.length <= 1) return
   currentImageIndex.value = (currentImageIndex.value + 1) % props.images.length
-  emit('update:currentIndex', currentImageIndex.value)
 }
 
 const previousImage = () => {
@@ -105,18 +92,13 @@ const previousImage = () => {
   currentImageIndex.value = currentImageIndex.value === 0 
     ? props.images.length - 1 
     : currentImageIndex.value - 1
-  emit('update:currentIndex', currentImageIndex.value)
 }
 
-// 이미지 인덱스 설정
-const setImageIndex = (index: number) => {
-  if (!props.images || index < 0 || index >= props.images.length) return
-  currentImageIndex.value = index
-  emit('update:currentIndex', currentImageIndex.value)
-}
 
 // 모달 닫기
 const closeModal = () => {
+  // 모달이 닫힐 때 현재 이미지 인덱스를 부모에게 알림
+  emit('update:currentIndex', currentImageIndex.value)
   emit('close')
 }
 
