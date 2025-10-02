@@ -33,12 +33,12 @@
          <div class="lg:col-span-2">
           <!-- 이미지 캐러셀 -->
           <div class="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                         <div ref="carouselRef" class="relative aspect-video sm:aspect-[3/2] lg:aspect-[4/3]" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+                         <div ref="carouselRef" class="relative aspect-video sm:aspect-[3/2] lg:aspect-[4/3] cursor-pointer" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @click="openImageModal">
               <img
                 v-if="furniture.images && furniture.images.length > 0"
                 :src="currentImage"
                 :alt="furniture.title"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover hover:opacity-90 transition-opacity"
               />
               <div v-else class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                 <svg class="h-24 w-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,18 +47,18 @@
               </div>
 
               <!-- 이미지 네비게이션 -->
-              <div v-if="furniture.images && furniture.images.length > 1" class="absolute inset-0 flex items-center justify-between p-4">
+              <div v-if="furniture.images && furniture.images.length > 1" class="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
                 <button
-                  @click="previousImage"
-                  class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all"
+                  @click.stop="previousImage"
+                  class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all pointer-events-auto"
                 >
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                   </svg>
                 </button>
                 <button
-                  @click="nextImage"
-                  class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all"
+                  @click.stop="nextImage"
+                  class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all pointer-events-auto"
                 >
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -192,12 +192,22 @@
       </div>
     </div>
 
+    <!-- 이미지 모달 -->
+    <ImageModal
+      :is-open="showImageModal"
+      :images="furniture?.images || []"
+      :initial-index="currentImageIndex"
+      :alt="furniture?.title || ''"
+      @close="closeImageModal"
+      @update:current-index="updateModalImageIndex"
+    />
 
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Furniture } from '~/types'
+import ImageModal from '~/components/ui/ImageModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -222,6 +232,7 @@ const hasSwiped = ref(false)
 const showPasswordModal = ref(false)
 const password = ref('')
 const passwordMode = ref<'delete' | 'edit'>('delete')
+const showImageModal = ref(false)
 
 // 현재 이미지
 const currentImage = computed(() => {
@@ -377,6 +388,26 @@ const handleEditClick = () => {
   passwordMode.value = 'edit'
   openPasswordModal()
 }
+
+// 이미지 모달 열기
+const openImageModal = () => {
+  if (furniture.value?.images && furniture.value.images.length > 0) {
+    showImageModal.value = true
+  }
+}
+
+// 이미지 모달 닫기
+const closeImageModal = () => {
+  showImageModal.value = false
+}
+
+// 모달에서 이미지 인덱스 업데이트
+const updateModalImageIndex = (index: number) => {
+  // 모달이 열려있는 동안에는 메인 페이지의 이미지도 함께 변경
+  // 이렇게 하면 모달과 메인 페이지가 동기화됨
+  currentImageIndex.value = index
+}
+
 
 // 데이터 로드
 const loadFurniture = async () => {
