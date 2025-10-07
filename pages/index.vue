@@ -6,12 +6,7 @@
     <div class="px-4 py-6 sm:px-6 lg:px-8">
       <!-- 히어로 섹션 -->
       <div class="text-center mb-8 sm:mb-12">
-        <div class="mb-4">
-          <span class="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-4 shadow-lg border border-white/30">
-            ✨ 새로운 중고가구 경험
-          </span>
-        </div>
-        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black mb-4 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black mt-4 sm:mt-6 mb-4 bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent leading-tight">
           Get your furniture,<br>
           <span class="text-white drop-shadow-lg">get your future!</span>
         </h1>
